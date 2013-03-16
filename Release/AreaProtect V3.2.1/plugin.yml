@@ -1,0 +1,179 @@
+name: AreaProtect
+version: 3.2.1
+description: AreaProtect allows users to create their own protections easily.
+load: STARTUP
+author: BleedObsidian
+database: false
+depend: [WorldEdit, WorldGuard]
+softdepend: [BOSEconomy]
+prefix: AreaProtect
+website: http://dev.bukkit.org/server-mods/areaprotect/
+
+main: com.gmail.bleedobsidian.Main
+
+commands:
+  ap:
+    description: Alias for all AreaProtect commands.
+    usage: Syntax Error! see /ap help.
+
+permissions:
+
+  areaprotect.ap.help.*:
+    description: Allows user to view help and all help categories
+    default: true
+    children:
+      areaprotect.ap.help: true
+      areaprotect.ap.help.areas: true
+      areaprotect.ap.help.members: true
+      areaprotect.ap.help.flags: true
+      areaprotect.ap.help.commands: true
+
+  areaprotect.ap.destroy.*:
+    description: Allows user to destroy their area and areas they don't own.
+    default: op
+    children:
+      areaprotect.ap.destroy: true
+      areaprotect.ap.destroy.other: true
+     
+  areaprotect.ap.addmember.*:
+    description: Allows user to add members to their area and areas they don't own.
+    default: op
+    children:
+      areaprotect.ap.addmember: true
+      areaprotect.ap.addmember.other: true
+
+  areaprotect.ap.removemember.*:
+    description: Allows user to remove members of their area and areas they don't own.
+    default: op
+    children:
+      areaprotect.ap.removemember: true
+      areaprotect.ap.removemember.other: true
+ 
+  areaprotect.ap.flag.*:
+    description: Allows user to change all flags for their areas.
+    default: true
+    children:
+      areaprotect.ap.flag.greeting: true
+      areaprotect.ap.flag.farewell: true
+      areaprotect.ap.flag.pvp: true
+      areaprotect.ap.flag.chestaccess: true
+      areaprotect.ap.flag.entry: true
+      
+  areaprotect.ap.flag.other.*:
+    description: Allows user to change all flags for areas they don't own.
+    default: op
+    children:
+      areaprotect.ap.flag.greeting.other: true
+      areaprotect.ap.flag.farewell.other: true
+      areaprotect.ap.flag.pvp.other: true
+      areaprotect.ap.flag.chestaccess.other: true
+      areaprotect.ap.flag.entry.other: true
+  
+
+  areaprotect.ap.help:
+    description: Allows user to view help about areaprotect.
+    default: true
+    
+  areaprotect.ap.help.areas:
+    description: Allows user to view help about areas.
+    default: true
+    
+  areaprotect.ap.help.members:
+    description: Allows user to view help about members.
+    default: true
+    
+  areaprotect.ap.help.flags:
+    description: Allows user to view help about flags.
+    default: true
+    
+  areaprotect.ap.help.commands:
+    description: Allows user to view all commands.
+    default: true
+    
+  areaprotect.ap.info:
+    description: Allows user to view info about him e.g How many areas he has ect
+    default: true
+    
+  areaprotect.ap.region:
+    description: Allows user to view info about his area.
+    default: true
+ 
+  areaprotect.ap.create:
+    description: Allows user to create an area.
+    default: true
+    
+  areaprotect.ap.create.BOSEBypass:
+    description: Allows user to create an area without having to pay.
+    default: op
+    
+  areaprotect.ap.destroy:
+    description: Allows user to destroy their area.
+    default: true
+
+  areaprotect.ap.addmember:
+    description: Allows user to add people who can build in their area. (Members)
+    default: true
+
+  areaprotect.ap.removemember:
+    description: Allows user to remove members.
+    default: true
+
+  areaprotect.ap.flag.greeting:
+    description: Allows user to change the 'Greeting' flag.
+    default: true
+    
+  areaprotect.ap.flag.farewell:
+    description: Allows user to change the 'Farewell' flag.
+    default: true
+    
+  areaprotect.ap.flag.pvp:
+    description: Allows user to change the 'PvP' flag.
+    default: true
+    
+  areaprotect.ap.flag.chestaccess:
+    description: Allows user to change the 'Chest-Access' flag.
+    default: true
+    
+  areaprotect.ap.flag.entry:
+    description: Allows user to change the 'Entry' flag.
+    default: true
+
+  areaprotect.ap.info.other:
+    description: Allows user to view info about other people.
+    default: op
+
+  areaprotect.ap.region.other:
+    description: Allows user to view info about other people's areas.
+    default: op
+
+  areaprotect.ap.destroy.other:
+    description: Allows user to destroy areas they don't own.
+    default: op
+
+  areaprotect.ap.addmember.other:
+    description: Allows user to add people who can build in areas they don't own. (Members)
+    default: op
+
+  areaprotect.ap.removemember.other:
+    description: Allows user to remove members of areas they don't own.
+    default: op
+    
+  areaprotect.ap.flag.greeting.other:
+    description: Allows user to change the 'Greeting' flag of other areas.
+    default: op
+    
+  areaprotect.ap.flag.farewell.other:
+    description: Allows user to change the 'Farewell' flag of other areas.
+    default: op
+    
+  areaprotect.ap.flag.pvp.other:
+    description: Allows user to change the 'PvP' flag of other areas.
+    default: op
+    
+  areaprotect.ap.flag.chestaccess.other:
+    description: Allows user to change the 'Chest-Access' flag of other areas.
+    default: op
+    
+  areaprotect.ap.flag.entry.other:
+    description: Allows user to change the 'Entry' flag of other areas.
+    default: op
