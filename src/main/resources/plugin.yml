@@ -1,0 +1,11 @@
+name: AreaProtect
+version: 4.0
+description: AreaProtect allows users to create their own protections easily.
+load: STARTUP
+author: BleedObsidian
+website: http://dev.bukkit.org/bukkit-plugins/areaprotect/
+depend: [WorldEdit, WorldGuard]
+softdepend: [Vault]
+prefix: AreaProtect
+
+main: com.gmail.bleedobsidian.areaprotect.Main
