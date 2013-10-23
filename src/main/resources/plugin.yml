@@ -8,4 +8,10 @@ depend: [WorldEdit, WorldGuard]
 softdepend: [Vault]
 prefix: AreaProtect
 
-main: com.gmail.bleedobsidian.areaprotect.Main
+main: com.gmail.bleedobsidian.areaprotect.AreaProtect
+
+commands:
+    ap:
+        description: Main alias for AreaProtect commands.
+        aliases: [areaprotect, protect]
+        usage: Syntax Error! /ap help
