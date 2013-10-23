@@ -3,7 +3,8 @@
 Console:
     Enabled: AreaProtect v%Version% enabled!
     Disabled: AreaProtect v%Version% disabled!
-    Update-Available: A newer version of Showcase is available!
+    Update-Available: A newer version of AreaProtect is available!
+    Loaded-Groups: Loaded Groups.
     WorldGuard:
         Successful: Loaded WorldGuard.
         Unsuccessful: Failed to load WorldGuard.

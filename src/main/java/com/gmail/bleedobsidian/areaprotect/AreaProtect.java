@@ -24,12 +24,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.bleedobsidian.areaprotect.commands.APCommandExecutor;
 import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
 import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
+import com.gmail.bleedobsidian.areaprotect.managers.GroupManager;
 import com.gmail.bleedobsidian.areaprotect.metrics.Graphs;
 import com.gmail.bleedobsidian.areaprotect.metrics.Metrics;
 
 public class AreaProtect extends JavaPlugin {
     private ConfigFile config;
     private ConfigFile groups;
+
+    private GroupManager groupManager;
 
     private WorldGuard worldGuard;
     private Vault vault;
@@ -125,6 +128,13 @@ public class AreaProtect extends JavaPlugin {
                     Language.getLanguageFile().getMessage(
                             "Console.Metrics.Unsuccessful"), true);
         }
+
+        // Load Groups
+        this.groupManager = new GroupManager(groups);
+        this.groupManager.loadGroups();
+
+        PluginLogger.info(Language.getLanguageFile().getMessage(
+                "Console.Loaded-Groups"));
 
         // Register command
         this.getCommand("ap").setExecutor(new APCommandExecutor(this));
