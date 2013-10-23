@@ -17,9 +17,18 @@
 
 package com.gmail.bleedobsidian.areaprotect.logger;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+/**
+ * This API class allows you to easily send messages to a player.
+ * 
+ * @author Jesse Prescott
+ */
 public class PlayerLogger {
+    private static String prefix = ChatColor.BLUE + "[AreaProtect]";
+
     public static void message(Player player, String message) {
+        player.sendMessage(prefix + ": " + ChatColor.RESET + message);
     }
 }
