@@ -14,4 +14,3 @@ commands:
     ap:
         description: Main alias for AreaProtect commands.
         aliases: [areaprotect, protect]
-        usage: Syntax Error! /ap help
