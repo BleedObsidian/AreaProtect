@@ -24,7 +24,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
 import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
 
-public class Main extends JavaPlugin {
+public class AreaProtect extends JavaPlugin {
     private ConfigFile config;
     private ConfigFile groups;
 
