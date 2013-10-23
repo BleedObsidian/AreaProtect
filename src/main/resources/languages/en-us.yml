@@ -4,6 +4,9 @@ Console:
     Enabled: Showcase v%Version% enabled!
     Disabled: Showcase v%Version% disabled!
     Update-Available: A newer version of Showcase is available!
+    WorldGuard:
+        Successful: Loaded WorldGuard.
+        Unsuccessful: Failed to load WorldGuard.
     Vault:
         Successful: Loaded Vault.
-        Unsuccessful: Failed to load Vault. (You need an Economy plugin installed too.)
+        Unsuccessful: Failed to load Vault. (You need Vault and an Economy plugin installed too.)

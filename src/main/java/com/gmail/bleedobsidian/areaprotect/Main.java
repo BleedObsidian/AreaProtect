@@ -28,6 +28,7 @@ public class Main extends JavaPlugin {
     private ConfigFile config;
     private ConfigFile groups;
 
+    private WorldGuard worldGuard;
     private Vault vault;
 
     @Override
@@ -65,6 +66,18 @@ public class Main extends JavaPlugin {
                 PluginLogger.warning(Language.getLanguageFile().getMessage(
                         "Console.Update-Available"));
             }
+        }
+
+        // Load WorldGuard
+        this.worldGuard = new WorldGuard();
+
+        if (this.worldGuard.load(this)) {
+            PluginLogger.info(Language.getLanguageFile().getMessage(
+                    "Console.WorldGuard.Successful"));
+        } else {
+            PluginLogger.error(Language.getLanguageFile().getMessage(
+                    "Console.WorldGuard.Unsuccessful"));
+            return;
         }
 
         // Load Vault
