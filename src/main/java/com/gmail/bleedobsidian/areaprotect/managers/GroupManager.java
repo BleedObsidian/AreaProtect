@@ -17,7 +17,7 @@
 
 package com.gmail.bleedobsidian.areaprotect.managers;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 
 import org.bukkit.configuration.ConfigurationSection;
@@ -29,7 +29,7 @@ import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
 public class GroupManager {
     private ConfigFile groupFile;
 
-    private ArrayList<Group> groups = new ArrayList<Group>();
+    private HashMap<String, Group> groups = new HashMap<String, Group>();
     private Group defaultGroup;
 
     public GroupManager(ConfigFile groupFile) {
@@ -88,8 +88,20 @@ public class GroupManager {
             if (groupName.equalsIgnoreCase("Default")) {
                 this.defaultGroup = group;
             } else {
-                this.groups.add(group);
+                this.groups.put(groupName, group);
             }
         }
+    }
+
+    public Group getGroup(String name) {
+        return this.groups.get(name);
+    }
+
+    public HashMap<String, Group> getGroups() {
+        return this.groups;
+    }
+
+    public Group getDefaultGroup() {
+        return this.defaultGroup;
     }
 }
