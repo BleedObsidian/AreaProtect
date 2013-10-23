@@ -21,6 +21,9 @@ import java.io.IOException;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gmail.bleedobsidian.areaprotect.api.Vault;
+import com.gmail.bleedobsidian.areaprotect.api.WorldEdit;
+import com.gmail.bleedobsidian.areaprotect.api.WorldGuard;
 import com.gmail.bleedobsidian.areaprotect.commands.APCommandExecutor;
 import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
 import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
@@ -34,6 +37,7 @@ public class AreaProtect extends JavaPlugin {
 
     private GroupManager groupManager;
 
+    private WorldEdit worldEdit;
     private WorldGuard worldGuard;
     private Vault vault;
 
@@ -74,6 +78,18 @@ public class AreaProtect extends JavaPlugin {
                 PluginLogger.warning(Language.getLanguageFile().getMessage(
                         "Console.Update-Available"));
             }
+        }
+
+        // Load WorldEdit
+        this.worldEdit = new WorldEdit();
+
+        if (this.worldEdit.load(this)) {
+            PluginLogger.info(Language.getLanguageFile().getMessage(
+                    "Console.WorldEdit.Successful"));
+        } else {
+            PluginLogger.error(Language.getLanguageFile().getMessage(
+                    "Console.WorldEdit.Unsuccessful"));
+            return;
         }
 
         // Load WorldGuard
@@ -153,6 +169,10 @@ public class AreaProtect extends JavaPlugin {
 
     public String getVersion() {
         return this.getDescription().getVersion();
+    }
+
+    public WorldEdit getWorldEdit() {
+        return this.worldEdit;
     }
 
     public WorldGuard getWorldGuard() {

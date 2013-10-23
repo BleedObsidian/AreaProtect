@@ -33,6 +33,12 @@
   	</dependency>
   	
   	<dependency>
+  	  <groupId>com.sk89q.worldedit</groupId>
+      <artifactId>worldedit</artifactId>
+      <version>5.5.8</version>
+  	</dependency>
+  	
+  	<dependency>
   	  <groupId>com.sk89q.worldguard</groupId>
       <artifactId>worldguard</artifactId>
       <version>5.8</version>

@@ -4,7 +4,10 @@ Console:
     Enabled: AreaProtect v%Version% enabled!
     Disabled: AreaProtect v%Version% disabled!
     Update-Available: A newer version of AreaProtect is available!
-    Loaded-Groups: Loaded Groups.
+    Loaded-Groups: Loaded groups from file.
+    WorldEdit:
+        Successful: Loaded WorldEdit.
+        Unsuccessful: Failed to load WorldEdit.
     WorldGuard:
         Successful: Loaded WorldGuard.
         Unsuccessful: Failed to load WorldGuard.
