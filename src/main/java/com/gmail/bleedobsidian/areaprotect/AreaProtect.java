@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gmail.bleedobsidian.areaprotect.commands.APCommandExecutor;
 import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
 import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
 
@@ -93,6 +94,9 @@ public class AreaProtect extends JavaPlugin {
                                 "Console.Vault.Unsuccessful"), true);
             }
         }
+
+        // Register command
+        this.getCommand("ap").setExecutor(new APCommandExecutor(this));
 
         PluginLogger.info(Language.getLanguageFile().getMessage(
                 "Console.Enabled",
