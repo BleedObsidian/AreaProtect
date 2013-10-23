@@ -20,27 +20,43 @@ package com.gmail.bleedobsidian.areaprotect.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.gmail.bleedobsidian.areaprotect.AreaProtect;
-import com.gmail.bleedobsidian.areaprotect.api.Vault;
-import com.gmail.bleedobsidian.areaprotect.api.WorldGuard;
+import com.gmail.bleedobsidian.areaprotect.Language;
+import com.gmail.bleedobsidian.areaprotect.logger.PlayerLogger;
 
 public class APCommandExecutor implements CommandExecutor {
     private AreaProtect areaProtect;
 
-    private WorldGuard worldGuard;
-    private Vault vault;
-
     public APCommandExecutor(AreaProtect areaProtect) {
         this.areaProtect = areaProtect;
-
-        this.worldGuard = areaProtect.getWorldGuard();
-        this.vault = areaProtect.getVault();
     }
 
     public boolean onCommand(CommandSender sender, Command command,
             String label, String[] args) {
-        return false;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+
+            if (this.proccessCommand(player, args)) {
+                return true;
+            } else {
+                PlayerLogger.message(player, Language.getLanguageFile()
+                        .getMessage("Player.Syntax-Error"));
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
+    private boolean proccessCommand(Player player, String[] args) {
+        if (args[0].equalsIgnoreCase("create")) {
+            Create.create(areaProtect, player, args);
+        } else {
+            return false;
+        }
+
+        return true;
+    }
 }

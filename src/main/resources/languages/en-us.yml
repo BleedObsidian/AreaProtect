@@ -18,3 +18,7 @@ Console:
         Successful: Started Metrics.
         Unsuccessful: Failed to start Metrics.
         Disabled: Plugin Metrics Disabled!
+Player:
+    Create:
+        No-Selection: (RED)You must select an area before creation.
+    Syntax-Error: (RED)Invalid Command. Use (GREEN)/ap help(RED) for help.
