@@ -1,8 +1,8 @@
 #-------------------- EN-US --------------------#
 
 Console:
-    Enabled: Showcase v%Version% enabled!
-    Disabled: Showcase v%Version% disabled!
+    Enabled: AreaProtect v%Version% enabled!
+    Disabled: AreaProtect v%Version% disabled!
     Update-Available: A newer version of Showcase is available!
     WorldGuard:
         Successful: Loaded WorldGuard.
@@ -10,3 +10,7 @@ Console:
     Vault:
         Successful: Loaded Vault.
         Unsuccessful: Failed to load Vault. (You need Vault and an Economy plugin installed too.)
+    Metrics:
+        Successful: Started Metrics.
+        Unsuccessful: Failed to start Metrics.
+        Disabled: Plugin Metrics Disabled!

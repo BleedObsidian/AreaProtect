@@ -24,6 +24,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.bleedobsidian.areaprotect.commands.APCommandExecutor;
 import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
 import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
+import com.gmail.bleedobsidian.areaprotect.metrics.Graphs;
+import com.gmail.bleedobsidian.areaprotect.metrics.Metrics;
 
 public class AreaProtect extends JavaPlugin {
     private ConfigFile config;
@@ -31,6 +33,8 @@ public class AreaProtect extends JavaPlugin {
 
     private WorldGuard worldGuard;
     private Vault vault;
+
+    private Metrics metrics;
 
     @Override
     public void onEnable() {
@@ -93,6 +97,33 @@ public class AreaProtect extends JavaPlugin {
                         Language.getLanguageFile().getMessage(
                                 "Console.Vault.Unsuccessful"), true);
             }
+        }
+
+        // Metrics
+        try {
+            this.metrics = new Metrics(this);
+
+            if (!metrics.isOptOut()) {
+                Graphs graphs = new Graphs(metrics, this.config);
+
+                graphs.createGraphs();
+
+                if (metrics.start()) {
+                    PluginLogger.info(Language.getLanguageFile().getMessage(
+                            "Console.Metrics.Successful"));
+                } else {
+                    PluginLogger.warning(
+                            Language.getLanguageFile().getMessage(
+                                    "Console.Metrics.Unsuccessful"), true);
+                }
+            } else {
+                PluginLogger.warning(Language.getLanguageFile().getMessage(
+                        "Console.Metrics.Disabled"));
+            }
+        } catch (IOException e) {
+            PluginLogger.warning(
+                    Language.getLanguageFile().getMessage(
+                            "Console.Metrics.Unsuccessful"), true);
         }
 
         // Register command
