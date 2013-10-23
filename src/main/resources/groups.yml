@@ -1,0 +1,12 @@
+#-------------------- AreaProtect Group File --------------------#
+# This file allows you to create customized groups that limits/
+# alters a player's area permissions (EG: How many areas they can
+# create ect). You can add players to these groups by giving them
+# the permission: areaprotect.group.GROUP_NAME
+#----------------------------------------------------------------#
+
+Groups:
+    # You must have a default group called 'Default'. This group
+    # is the default group a player is placed in when he is not
+    # apart of any other.
+    Default:

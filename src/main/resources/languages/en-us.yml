@@ -1,0 +1,9 @@
+#-------------------- EN-US --------------------#
+
+Console:
+    Enabled: Showcase v%Version% enabled!
+    Disabled: Showcase v%Version% disabled!
+    Update-Available: A newer version of Showcase is available!
+    Vault:
+        Successful: Loaded Vault.
+        Unsuccessful: Failed to load Vault. (You need an Economy plugin installed too.)
