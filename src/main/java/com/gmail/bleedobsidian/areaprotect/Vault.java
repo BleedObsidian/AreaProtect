@@ -28,7 +28,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Jesse Prescott
  */
 public class Vault {
-    private static Economy economy;
+    private Economy economy;
 
     /**
      * Load vault and an economy plugin.
@@ -37,16 +37,21 @@ public class Vault {
      *            - JavaPlugin.
      * @return If successfully loaded.
      */
-    public static boolean load(JavaPlugin plugin) {
-        RegisteredServiceProvider<Economy> economyProvider = plugin.getServer()
-                .getServicesManager()
-                .getRegistration(net.milkbowl.vault.economy.Economy.class);
+    public boolean load(JavaPlugin plugin) {
+        if (Vault.isAccessible(plugin)) {
+            RegisteredServiceProvider<Economy> economyProvider = plugin
+                    .getServer().getServicesManager()
+                    .getRegistration(Economy.class);
 
-        if (economyProvider != null) {
-            Vault.economy = economyProvider.getProvider();
+            if (economyProvider != null) {
+                this.economy = economyProvider.getProvider();
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-
-        return (economy != null);
     }
 
     /**
@@ -54,7 +59,19 @@ public class Vault {
      * 
      * @return Economy plugin.
      */
-    public static Economy getEconomy() {
-        return Vault.economy;
+    public Economy getEconomy() {
+        return this.economy;
+    }
+
+    /**
+     * If Vault is accessible.
+     * 
+     * @param plugin
+     *            - JavaPlugin.
+     * @return If Vault is accessible.
+     */
+    public static boolean isAccessible(JavaPlugin plugin) {
+        return plugin.getServer().getPluginManager().getPlugin("Vault") == null ? false
+                : true;
     }
 }
