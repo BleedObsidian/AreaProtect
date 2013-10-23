@@ -54,7 +54,7 @@ public class WorldGuard {
      * 
      * @return Economy plugin.
      */
-    public WorldGuardPlugin getWorldGuard() {
+    public WorldGuardPlugin getWorldGuardPlugin() {
         return this.worldGuard;
     }
 }

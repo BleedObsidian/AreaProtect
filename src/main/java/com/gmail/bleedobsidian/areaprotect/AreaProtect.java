@@ -109,4 +109,12 @@ public class AreaProtect extends JavaPlugin {
     public String getVersion() {
         return this.getDescription().getVersion();
     }
+
+    public WorldGuard getWorldGuard() {
+        return this.worldGuard;
+    }
+
+    public Vault getVault() {
+        return this.vault;
+    }
 }
