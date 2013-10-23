@@ -22,8 +22,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.gmail.bleedobsidian.areaprotect.AreaProtect;
-import com.gmail.bleedobsidian.areaprotect.Vault;
-import com.gmail.bleedobsidian.areaprotect.WorldGuard;
+import com.gmail.bleedobsidian.areaprotect.api.Vault;
+import com.gmail.bleedobsidian.areaprotect.api.WorldGuard;
 
 public class APCommandExecutor implements CommandExecutor {
     private AreaProtect areaProtect;
