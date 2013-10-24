@@ -12,9 +12,12 @@ Groups:
     Default:
         # Maximum amount of areas this group can create.
         Maximum-Areas: 1
-        # Maximum amount of blocks can be protected within an
-        # area for this group.
-        Maximum-Blocks: 1000
+        # Maximum height of area.
+        Maximum-Height: 100
+        # Maximum length of area.
+        Maximum-Length: 100
+        # Maximum width of area.
+        Maximum-Width: 100
         # If a player in this group should pay per block.
         Pay-Per-Block: false
         # Price to create an area or price per block (If true) in this group.
@@ -25,12 +28,12 @@ Groups:
                 Enabled: true
                 # Variables:
                 #   %Area_Name%: The name the player chooses when creating an area.
-                Message: Welcome to %Area_Name%.
+                Message: "&gWelcome to &Y%Area_Name%&g."
             Farewell:
                 Enabled: true
                 # Variables:
                 #   %Area_Name%: The name the player chooses when creating an area.
-                Message: Bye!
+                Message: "&gBye!"
             PvP: true
             Chest-Access: false
             Entry: true

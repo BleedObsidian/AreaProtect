@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 
 import com.gmail.bleedobsidian.areaprotect.FlagSet;
 import com.gmail.bleedobsidian.areaprotect.Group;
@@ -46,7 +47,9 @@ public class GroupManager {
                             "Groups." + groupName);
 
             int maximumAreas = groupSection.getInt("Maximum-Areas");
-            int maximumBlocks = groupSection.getInt("Maximum-Blocks");
+            int maximumHeight = groupSection.getInt("Maximum-Height");
+            int maximumLength = groupSection.getInt("Maximum-Length");
+            int maximumWidth = groupSection.getInt("Maximum-Width");
             boolean payPerBlock = groupSection.getBoolean("Pay-Per-Block");
             double price = groupSection.getDouble("Price");
 
@@ -54,17 +57,13 @@ public class GroupManager {
 
             defaultFlags.setGreeting(groupSection
                     .getBoolean("Flags.Greeting.Enabled"));
-            defaultFlags
-                    .setGreetingMessage(
-                            groupSection.getString("Flags.Greeting.Message"),
-                            groupName);
+            defaultFlags.setGreetingMessage(groupSection
+                    .getString("Flags.Greeting.Message"));
             defaultFlags.setFarewell(groupSection
                     .getBoolean("Flags.Farewell.Enabled"));
-            defaultFlags
-                    .setFarewellMessage(
-                            groupSection.getString("Flags.Farewell.Message"),
-                            groupName);
-            defaultFlags.setPVP(groupSection.getBoolean("Flags.PVP"));
+            defaultFlags.setFarewellMessage(groupSection
+                    .getString("Flags.Farewell.Message"));
+            defaultFlags.setPVP(groupSection.getBoolean("Flags.PvP"));
             defaultFlags.setChestAccess(groupSection
                     .getBoolean("Flags.Chest-Access"));
             defaultFlags.setEntry(groupSection.getBoolean("Flags.Entry"));
@@ -82,8 +81,9 @@ public class GroupManager {
             defaultFlags.setEndermanGrief(groupSection
                     .getBoolean("Flags.Enderman-Grief"));
 
-            Group group = new Group(groupName, maximumAreas, maximumBlocks,
-                    payPerBlock, price, defaultFlags);
+            Group group = new Group(groupName, maximumAreas, maximumHeight,
+                    maximumLength, maximumWidth, payPerBlock, price,
+                    defaultFlags);
 
             if (groupName.equalsIgnoreCase("Default")) {
                 this.defaultGroup = group;
@@ -95,6 +95,16 @@ public class GroupManager {
 
     public Group getGroup(String name) {
         return this.groups.get(name);
+    }
+
+    public Group getGroup(Player player) {
+        for (String groupName : this.groups.keySet()) {
+            if (player.hasPermission("areaprotect.group." + groupName)) {
+                return this.groups.get(groupName);
+            }
+        }
+
+        return this.defaultGroup;
     }
 
     public HashMap<String, Group> getGroups() {
