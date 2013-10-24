@@ -17,6 +17,13 @@
 
 package com.gmail.bleedobsidian.areaprotect;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.flags.Flag;
+import com.sk89q.worldguard.protection.flags.StateFlag.State;
+
 public class FlagSet {
     private boolean greeting;
     private boolean farewell;
@@ -33,6 +40,39 @@ public class FlagSet {
 
     private String greetingMessage;
     private String farewellMessage;
+
+    public Map<Flag<?>, Object> toWorldGuardFlags(String areaName) {
+        Map<Flag<?>, Object> flags = new HashMap<Flag<?>, Object>();
+
+        flags.put(DefaultFlag.PVP, this.toState(pvp));
+        flags.put(DefaultFlag.CHEST_ACCESS, this.toState(chestAccess));
+        flags.put(DefaultFlag.ENTRY, this.toState(entry));
+        flags.put(DefaultFlag.SEND_CHAT, this.toState(sendChat));
+        flags.put(DefaultFlag.RECEIVE_CHAT, this.toState(receiveChat));
+        flags.put(DefaultFlag.USE, this.toState(use));
+        flags.put(DefaultFlag.MOB_DAMAGE, this.toState(mobDamage));
+        flags.put(DefaultFlag.MOB_SPAWNING, this.toState(mobSpawning));
+        flags.put(DefaultFlag.CREEPER_EXPLOSION, this.toState(creeperExplosion));
+        flags.put(DefaultFlag.ENDER_BUILD, this.toState(endermanGrief));
+
+        if (greeting) {
+            this.greetingMessage = "&b[AreaProtect]: " + this.greetingMessage;
+            this.greetingMessage = greetingMessage.replaceAll("%Area_Name%",
+                    areaName);
+
+            flags.put(DefaultFlag.GREET_MESSAGE, this.greetingMessage);
+        }
+
+        if (farewell) {
+            this.farewellMessage = "&b[AreaProtect]: " + this.farewellMessage;
+            this.farewellMessage = farewellMessage.replaceAll("%Area_Name%",
+                    areaName);
+
+            flags.put(DefaultFlag.FAREWELL_MESSAGE, this.farewellMessage);
+        }
+
+        return flags;
+    }
 
     public boolean isGreeting() {
         return greeting;
@@ -134,17 +174,23 @@ public class FlagSet {
         return greetingMessage;
     }
 
-    public void setGreetingMessage(String greetingMessage, String areaName) {
-        this.greetingMessage = greetingMessage.replaceAll("%Area_Name%",
-                areaName);
+    public void setGreetingMessage(String greetingMessage) {
+        this.greetingMessage = greetingMessage;
     }
 
     public String getFarewellMessage() {
         return farewellMessage;
     }
 
-    public void setFarewellMessage(String farewellMessage, String areaName) {
-        this.farewellMessage = farewellMessage.replaceAll("%Area_Name%",
-                areaName);
+    public void setFarewellMessage(String farewellMessage) {
+        this.farewellMessage = farewellMessage;
+    }
+
+    private State toState(boolean bool) {
+        if (bool) {
+            return State.ALLOW;
+        } else {
+            return State.DENY;
+        }
     }
 }
