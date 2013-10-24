@@ -17,7 +17,7 @@ commands:
         
 permissions:
     areaprotect.ap.create:
-        description: Use command /ap create.
+        description: Use command /ap create & /ap cancel.
         
     areaprotect.ap.group.bypass.area-limit:
         description: Bypass groups area limit.

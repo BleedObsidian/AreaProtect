@@ -29,11 +29,15 @@ import com.gmail.bleedobsidian.areaprotect.listeners.BlockListener;
 import com.gmail.bleedobsidian.areaprotect.managers.interfaces.SelectionListener;
 
 public class SelectionManager {
+    private BlockListener blockListener;
+
     private Map<SelectionListener, Player> pendingSelections = new HashMap<SelectionListener, Player>();
 
     public SelectionManager(JavaPlugin plugin) {
+        this.blockListener = new BlockListener(this);
+
         plugin.getServer().getPluginManager()
-                .registerEvents(new BlockListener(this), plugin);
+                .registerEvents(blockListener, plugin);
     }
 
     public void addPendingSelection(SelectionListener listener, Player player) {
@@ -46,6 +50,7 @@ public class SelectionManager {
                     .entrySet()) {
                 if (entry.getValue().equals(player)) {
                     entry.getKey().selectionCanceled(player);
+                    this.blockListener.removeSelections(player);
                     this.pendingSelections.remove(entry.getKey());
                 }
             }

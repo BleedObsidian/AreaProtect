@@ -53,6 +53,8 @@ public class APCommandExecutor implements CommandExecutor {
     private boolean proccessCommand(Player player, String[] args) {
         if (args[0].equalsIgnoreCase("create")) {
             Create.create(areaProtect, player, args);
+        } else if (args[0].equalsIgnoreCase("cancel")) {
+            Cancel.cancel(areaProtect, player, args);
         } else {
             return false;
         }

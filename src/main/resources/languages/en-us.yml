@@ -39,5 +39,7 @@ Player:
         Took-Money: "(GREEN)Removed (GOLD)%Amount% (GREEN)%Currency_Name% from your account."
         Successful: "(GOLD)%Area_Name% (GREEN)Created."
         Error: "(RED)Failed to create area."
+    Cancel:
+        Not-Creating: "(RED)You are not currently creating an area."
     Permission: "(RED)You don't have permission to use this command."
     Syntax-Error: "(RED)Invalid Command. Use (GOLD)/ap help(RED) for help."

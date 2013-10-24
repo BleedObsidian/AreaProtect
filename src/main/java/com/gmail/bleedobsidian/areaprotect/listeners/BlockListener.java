@@ -67,4 +67,10 @@ public class BlockListener implements Listener {
             }
         }
     }
+
+    public void removeSelections(Player player) {
+        if (this.locations.containsKey(player)) {
+            this.locations.remove(player);
+        }
+    }
 }
