@@ -14,3 +14,16 @@ commands:
     ap:
         description: Main alias for AreaProtect commands.
         aliases: [areaprotect, protect]
+        
+permissions:
+    areaprotect.ap.create:
+        description: Use command /ap create.
+        
+    areaprotect.ap.group.bypass.area-limit:
+        description: Bypass groups area limit.
+        
+    areaprotect.ap.group.bypass.price:
+        description: Bypass paying for areas.
+        
+    areaprotect.ap.group.bypass.area-size:
+        description: Bypass area height, length and width limits.

@@ -28,6 +28,7 @@ import com.gmail.bleedobsidian.areaprotect.commands.APCommandExecutor;
 import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
 import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
 import com.gmail.bleedobsidian.areaprotect.managers.GroupManager;
+import com.gmail.bleedobsidian.areaprotect.managers.SelectionManager;
 import com.gmail.bleedobsidian.areaprotect.metrics.Graphs;
 import com.gmail.bleedobsidian.areaprotect.metrics.Metrics;
 
@@ -36,6 +37,7 @@ public class AreaProtect extends JavaPlugin {
     private ConfigFile groups;
 
     private GroupManager groupManager;
+    private SelectionManager selectionManager;
 
     private WorldEdit worldEdit;
     private WorldGuard worldGuard;
@@ -115,6 +117,7 @@ public class AreaProtect extends JavaPlugin {
                 PluginLogger.warning(
                         Language.getLanguageFile().getMessage(
                                 "Console.Vault.Unsuccessful"), true);
+                this.vault = null;
             }
         }
 
@@ -152,6 +155,9 @@ public class AreaProtect extends JavaPlugin {
         PluginLogger.info(Language.getLanguageFile().getMessage(
                 "Console.Loaded-Groups"));
 
+        // Create selection manager
+        this.selectionManager = new SelectionManager(this);
+
         // Register command
         this.getCommand("ap").setExecutor(new APCommandExecutor(this));
 
@@ -165,6 +171,14 @@ public class AreaProtect extends JavaPlugin {
         PluginLogger.info(Language.getLanguageFile().getMessage(
                 "Console.Disabled",
                 new String[] { "%Version%", this.getVersion() }));
+    }
+
+    public GroupManager getGroupManager() {
+        return this.groupManager;
+    }
+
+    public SelectionManager getSelectionManager() {
+        return this.selectionManager;
     }
 
     public String getVersion() {

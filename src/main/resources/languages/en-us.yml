@@ -20,5 +20,24 @@ Console:
         Disabled: Plugin Metrics Disabled!
 Player:
     Create:
-        No-Selection: (RED)You must select an area before creation.
-    Syntax-Error: (RED)Invalid Command. Use (GREEN)/ap help(RED) for help.
+        Usage: "(RED)Usage: (GOLD)/ap create [name]"
+        Select: "(GREEN)Select two points for your area."
+        Select-1: "(GREEN)Point 1 selected."
+        Select-2: "(GREEN)Point 2 selected."
+        Selecting: "(RED) You are already creating an area."
+        Invalid-Name: "(RED)Area names can't contain '(GOLD)/(RED)'."
+        Name-Used: "(RED) You already have an area called (GOLD)%Area_Name%(RED) in this world."
+        Overlaps: "(RED)This selection overlaps with another area you don't own."
+        Cancel: "(GREEN)Use: (GOLD)/ap cancel (GREEN) to cancel."
+        Canceled: "(GREEN)Area creation canceled."
+        Max-Areas: "(RED)You have (GOLD)%Current%/%Max% (RED)areas."
+        Max-Height: "(RED)Selection height is too big, (GOLD)%Selected%/%Max%(RED) blocks."
+        Max-Length: "(RED)Selection length is too big, (GOLD)%Selected%/%Max%(RED) blocks."
+        Max-Width: "(RED)Selection width is too big, (GOLD)%Selected%/%Max%(RED) blocks."
+        Not-Enough: "(RED)You need (GOLD)%Price%(RED) %Currency_Name% to create an area."
+        Not-Enough-Per-Block: "(RED)You need (GOLD)%Price%(RED) %Currency_Name% to create this area."
+        Took-Money: "(GREEN)Removed (GOLD)%Amount% (GREEN)%Currency_Name% from your account."
+        Successful: "(GOLD)%Area_Name% (GREEN)Created."
+        Error: "(RED)Failed to create area."
+    Permission: "(RED)You don't have permission to use this command."
+    Syntax-Error: "(RED)Invalid Command. Use (GOLD)/ap help(RED) for help."

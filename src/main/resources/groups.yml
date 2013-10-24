@@ -13,11 +13,11 @@ Groups:
         # Maximum amount of areas this group can create.
         Maximum-Areas: 1
         # Maximum height of area.
-        Maximum-Height: 100
+        Maximum-Height: 35
         # Maximum length of area.
-        Maximum-Length: 100
+        Maximum-Length: 35
         # Maximum width of area.
-        Maximum-Width: 100
+        Maximum-Width: 35
         # If a player in this group should pay per block.
         Pay-Per-Block: false
         # Price to create an area or price per block (If true) in this group.
