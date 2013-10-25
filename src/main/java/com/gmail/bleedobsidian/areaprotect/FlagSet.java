@@ -56,7 +56,6 @@ public class FlagSet {
         flags.put(DefaultFlag.ENDER_BUILD, this.toState(endermanGrief));
 
         if (greeting) {
-            this.greetingMessage = "&b[AreaProtect]: " + this.greetingMessage;
             this.greetingMessage = greetingMessage.replaceAll("%Area_Name%",
                     areaName);
 
@@ -64,7 +63,6 @@ public class FlagSet {
         }
 
         if (farewell) {
-            this.farewellMessage = "&b[AreaProtect]: " + this.farewellMessage;
             this.farewellMessage = farewellMessage.replaceAll("%Area_Name%",
                     areaName);
 
@@ -175,7 +173,7 @@ public class FlagSet {
     }
 
     public void setGreetingMessage(String greetingMessage) {
-        this.greetingMessage = greetingMessage;
+        this.greetingMessage = "&b[AreaProtect]: " + greetingMessage;
     }
 
     public String getFarewellMessage() {
@@ -183,7 +181,7 @@ public class FlagSet {
     }
 
     public void setFarewellMessage(String farewellMessage) {
-        this.farewellMessage = farewellMessage;
+        this.farewellMessage = "&b[AreaProtect]: " + farewellMessage;
     }
 
     private State toState(boolean bool) {
