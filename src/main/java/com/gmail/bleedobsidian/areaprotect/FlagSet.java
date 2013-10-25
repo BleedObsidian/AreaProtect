@@ -56,17 +56,13 @@ public class FlagSet {
         flags.put(DefaultFlag.ENDER_BUILD, this.toState(endermanGrief));
 
         if (greeting) {
-            this.greetingMessage = greetingMessage.replaceAll("%Area_Name%",
-                    areaName);
-
-            flags.put(DefaultFlag.GREET_MESSAGE, this.greetingMessage);
+            flags.put(DefaultFlag.GREET_MESSAGE,
+                    this.getGreetingMessage(areaName));
         }
 
         if (farewell) {
-            this.farewellMessage = farewellMessage.replaceAll("%Area_Name%",
-                    areaName);
-
-            flags.put(DefaultFlag.FAREWELL_MESSAGE, this.farewellMessage);
+            flags.put(DefaultFlag.FAREWELL_MESSAGE,
+                    this.getFarewellMessage(areaName));
         }
 
         return flags;
@@ -168,16 +164,16 @@ public class FlagSet {
         this.endermanGrief = endermanGrief;
     }
 
-    public String getGreetingMessage() {
-        return greetingMessage;
+    public String getGreetingMessage(String areaName) {
+        return greetingMessage.replaceAll("%Area_Name%", areaName);
     }
 
     public void setGreetingMessage(String greetingMessage) {
         this.greetingMessage = "&b[AreaProtect]: " + greetingMessage;
     }
 
-    public String getFarewellMessage() {
-        return farewellMessage;
+    public String getFarewellMessage(String areaName) {
+        return farewellMessage.replaceAll("%Area_Name%", areaName);
     }
 
     public void setFarewellMessage(String farewellMessage) {
