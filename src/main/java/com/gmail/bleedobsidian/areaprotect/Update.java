@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
+import com.gmail.bleedobsidian.areaprotect.loggers.PluginLogger;
 
 /**
  * This class allows you to check for updates on dev.bukkit.

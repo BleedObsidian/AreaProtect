@@ -21,14 +21,14 @@ import java.io.IOException;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.gmail.bleedobsidian.areaprotect.api.Vault;
-import com.gmail.bleedobsidian.areaprotect.api.WorldEdit;
-import com.gmail.bleedobsidian.areaprotect.api.WorldGuard;
+import com.gmail.bleedobsidian.areaprotect.apis.Vault;
+import com.gmail.bleedobsidian.areaprotect.apis.WorldEdit;
+import com.gmail.bleedobsidian.areaprotect.apis.WorldGuard;
 import com.gmail.bleedobsidian.areaprotect.commands.APCommandExecutor;
 import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
-import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
-import com.gmail.bleedobsidian.areaprotect.managers.GroupManager;
-import com.gmail.bleedobsidian.areaprotect.managers.SelectionManager;
+import com.gmail.bleedobsidian.areaprotect.loggers.PluginLogger;
+import com.gmail.bleedobsidian.areaprotect.manager.GroupManager;
+import com.gmail.bleedobsidian.areaprotect.manager.SelectionManager;
 import com.gmail.bleedobsidian.areaprotect.metrics.Graphs;
 import com.gmail.bleedobsidian.areaprotect.metrics.Metrics;
 

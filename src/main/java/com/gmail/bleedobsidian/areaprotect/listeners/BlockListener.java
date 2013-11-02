@@ -29,8 +29,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 import com.gmail.bleedobsidian.areaprotect.Language;
 import com.gmail.bleedobsidian.areaprotect.Selection;
-import com.gmail.bleedobsidian.areaprotect.logger.PlayerLogger;
-import com.gmail.bleedobsidian.areaprotect.managers.SelectionManager;
+import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
+import com.gmail.bleedobsidian.areaprotect.manager.SelectionManager;
 
 public class BlockListener implements Listener {
     private SelectionManager selectionManager;

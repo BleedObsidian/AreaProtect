@@ -22,7 +22,7 @@ import org.bukkit.entity.Player;
 import com.gmail.bleedobsidian.areaprotect.AreaProtect;
 import com.gmail.bleedobsidian.areaprotect.Language;
 import com.gmail.bleedobsidian.areaprotect.configuration.LanguageFile;
-import com.gmail.bleedobsidian.areaprotect.logger.PlayerLogger;
+import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
 
 public class Cancel {
     public static void cancel(AreaProtect areaProtect, Player player,

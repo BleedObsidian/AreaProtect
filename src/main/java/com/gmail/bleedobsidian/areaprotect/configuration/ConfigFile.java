@@ -28,7 +28,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.gmail.bleedobsidian.areaprotect.logger.PluginLogger;
+import com.gmail.bleedobsidian.areaprotect.loggers.PluginLogger;
 
 /**
  * This class allows you to create/load a configuration file.

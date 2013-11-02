@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.logger;
+package com.gmail.bleedobsidian.areaprotect.loggers;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

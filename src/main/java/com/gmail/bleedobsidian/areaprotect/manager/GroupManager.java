@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.managers;
+package com.gmail.bleedobsidian.areaprotect.manager;
 
 import java.util.HashMap;
 import java.util.Set;
