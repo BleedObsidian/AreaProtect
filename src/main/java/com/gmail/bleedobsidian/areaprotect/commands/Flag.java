@@ -42,32 +42,37 @@ public class Flag {
             return;
         }
 
+        WorldGuardPlugin worldGuard = areaProtect.getWorldGuard()
+                .getWorldGuardPlugin();
+        ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
+                player);
+
         String flag = args[1];
 
         if (flag.equalsIgnoreCase("greeting")) {
-            Flag.greeting(areaProtect, language, player, args);
+            Flag.greeting(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("farewell")) {
-            Flag.farewell(areaProtect, language, player, args);
+            Flag.farewell(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("pvp")) {
-            Flag.pvp(areaProtect, language, player, args);
+            Flag.pvp(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("chest-access")) {
-            Flag.chestAccess(areaProtect, language, player, args);
+            Flag.chestAccess(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("entry")) {
-            Flag.entry(areaProtect, language, player, args);
+            Flag.entry(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("send-chat")) {
-            Flag.sendChat(areaProtect, language, player, args);
+            Flag.sendChat(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("receive-chat")) {
-            Flag.receiveChat(areaProtect, language, player, args);
+            Flag.receiveChat(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("use")) {
-            Flag.use(areaProtect, language, player, args);
+            Flag.use(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("mob-damage")) {
-            Flag.mobDamage(areaProtect, language, player, args);
+            Flag.mobDamage(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("mob-spawning")) {
-            Flag.mobSpawning(areaProtect, language, player, args);
+            Flag.mobSpawning(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("creeper-explosion")) {
-            Flag.creeperExplosion(areaProtect, language, player, args);
+            Flag.creeperExplosion(areaProtect, language, player, regions, args);
         } else if (flag.equalsIgnoreCase("enderman-grief")) {
-            Flag.endermanGrief(areaProtect, language, player, args);
+            Flag.endermanGrief(areaProtect, language, player, regions, args);
         } else {
             PlayerLogger.message(
                     player,
@@ -78,7 +83,8 @@ public class Flag {
     }
 
     private static void greeting(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         if (!player.hasPermission("areaprotect.ap.flag.greeting")) {
             PlayerLogger.message(player,
                     language.getMessage("Player.Flag.Permission"));
@@ -93,9 +99,6 @@ public class Flag {
         LocalPlayer localPlayer = worldGuard.wrapPlayer(player);
 
         if (value.equalsIgnoreCase("true")) {
-            ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
-                    player);
-
             if (regions.size() == 0) {
                 PlayerLogger.message(player,
                         language.getMessage("Player.Flag.Not-In-Area"));
@@ -132,9 +135,6 @@ public class Flag {
                 continue;
             }
         } else if (value.equalsIgnoreCase("false")) {
-            ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
-                    player);
-
             if (regions.size() == 0) {
                 PlayerLogger.message(player,
                         language.getMessage("Player.Flag.Not-In-Area"));
@@ -166,9 +166,6 @@ public class Flag {
                 continue;
             }
         } else {
-            ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
-                    player);
-
             if (regions.size() == 0) {
                 PlayerLogger.message(player,
                         language.getMessage("Player.Flag.Not-In-Area"));
@@ -221,7 +218,8 @@ public class Flag {
     }
 
     private static void farewell(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         if (!player.hasPermission("areaprotect.ap.flag.farewell")) {
             PlayerLogger.message(player,
                     language.getMessage("Player.Flag.Permission"));
@@ -236,9 +234,6 @@ public class Flag {
         LocalPlayer localPlayer = worldGuard.wrapPlayer(player);
 
         if (value.equalsIgnoreCase("true")) {
-            ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
-                    player);
-
             if (regions.size() == 0) {
                 PlayerLogger.message(player,
                         language.getMessage("Player.Flag.Not-In-Area"));
@@ -275,9 +270,6 @@ public class Flag {
                 continue;
             }
         } else if (value.equalsIgnoreCase("false")) {
-            ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
-                    player);
-
             if (regions.size() == 0) {
                 PlayerLogger.message(player,
                         language.getMessage("Player.Flag.Not-In-Area"));
@@ -309,9 +301,6 @@ public class Flag {
                 continue;
             }
         } else {
-            ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
-                    player);
-
             if (regions.size() == 0) {
                 PlayerLogger.message(player,
                         language.getMessage("Player.Flag.Not-In-Area"));
@@ -364,52 +353,59 @@ public class Flag {
     }
 
     private static void pvp(AreaProtect areaProtect, LanguageFile language,
-            Player player, String[] args) {
+            Player player, ApplicableRegionSet regions, String[] args) {
         return;
     }
 
     private static void chestAccess(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         return;
     }
 
     private static void entry(AreaProtect areaProtect, LanguageFile language,
-            Player player, String[] args) {
+            Player player, ApplicableRegionSet regions, String[] args) {
         return;
     }
 
     private static void sendChat(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         return;
     }
 
     private static void receiveChat(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         return;
     }
 
     private static void use(AreaProtect areaProtect, LanguageFile language,
-            Player player, String[] args) {
+            Player player, ApplicableRegionSet regions, String[] args) {
         return;
     }
 
     private static void mobDamage(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         return;
     }
 
     private static void mobSpawning(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         return;
     }
 
     private static void creeperExplosion(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         return;
     }
 
     private static void endermanGrief(AreaProtect areaProtect,
-            LanguageFile language, Player player, String[] args) {
+            LanguageFile language, Player player, ApplicableRegionSet regions,
+            String[] args) {
         return;
     }
 
