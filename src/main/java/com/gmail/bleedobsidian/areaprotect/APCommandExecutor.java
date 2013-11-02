@@ -15,15 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.command;
+package com.gmail.bleedobsidian.areaprotect;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.gmail.bleedobsidian.areaprotect.AreaProtect;
-import com.gmail.bleedobsidian.areaprotect.Language;
+import com.gmail.bleedobsidian.areaprotect.commands.Cancel;
+import com.gmail.bleedobsidian.areaprotect.commands.Create;
+import com.gmail.bleedobsidian.areaprotect.commands.Destroy;
+import com.gmail.bleedobsidian.areaprotect.commands.Flag;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
 
 public class APCommandExecutor implements CommandExecutor {
