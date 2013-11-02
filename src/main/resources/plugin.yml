@@ -39,3 +39,6 @@ permissions:
         
     areaprotect.ap.flag.greeting:
         description: Set greeting flag.
+        
+    areaprotect.ap.flag.farewell:
+        description: Set farewell flag.
