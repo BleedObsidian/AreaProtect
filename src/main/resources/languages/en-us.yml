@@ -52,6 +52,7 @@ Player:
     Flag:
         Usage: "(RED)Usage: (GOLD)/ap flag [flag] [value]"
         No-Flag: "(GOLD)%flag% (RED)is not a flag."
+        No-Value: "(RED)/ap flag %flag% [true/false]"
         Not-Owner: "(RED)You are not the owner of this area."
         Not-In-Area: "(RED)You are not standing in an area."
         Not-Areaprotect: "(RED)This is not an areaprotect area."

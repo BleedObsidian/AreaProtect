@@ -28,6 +28,7 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.flags.StateFlag.State;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
@@ -354,7 +355,93 @@ public class Flag {
 
     private static void pvp(AreaProtect areaProtect, LanguageFile language,
             Player player, ApplicableRegionSet regions, String[] args) {
-        return;
+        if (!player.hasPermission("areaprotect.ap.flag.pvp")) {
+            PlayerLogger.message(player,
+                    language.getMessage("Player.Flag.Permission"));
+            return;
+        }
+
+        String value = args[2];
+        WorldGuardPlugin worldGuard = areaProtect.getWorldGuard()
+                .getWorldGuardPlugin();
+        RegionManager regionManager = worldGuard.getRegionManager(player
+                .getWorld());
+        LocalPlayer localPlayer = worldGuard.wrapPlayer(player);
+
+        if (value.equalsIgnoreCase("true")) {
+            if (regions.size() == 0) {
+                PlayerLogger.message(player,
+                        language.getMessage("Player.Flag.Not-In-Area"));
+                return;
+            }
+
+            for (ProtectedRegion region : regions) {
+                if (region.isOwner(localPlayer)
+                        && region.getId().contains("areaprotect")
+                        || player
+                                .hasPermission("areaprotect.ap.flag.bypass.owner")
+                        && region.getId().contains("areaprotect")) {
+
+                    region.setFlag(DefaultFlag.PVP, State.ALLOW);
+                } else if (!region.getId().contains("areaprotect")) {
+                    PlayerLogger.message(player,
+                            language.getMessage("Player.Flag.Not-Areaprotect"));
+                    return;
+                } else {
+                    PlayerLogger.message(player,
+                            language.getMessage("Player.Flag.Not-Owner"));
+                    return;
+                }
+
+                PlayerLogger.message(player, language
+                        .getMessage("Player.Flag.Enabled", new String[] {
+                                "%flag%", "pvp" }));
+                continue;
+            }
+        } else if (value.equalsIgnoreCase("false")) {
+            if (regions.size() == 0) {
+                PlayerLogger.message(player,
+                        language.getMessage("Player.Flag.Not-In-Area"));
+                return;
+            }
+
+            for (ProtectedRegion region : regions) {
+                if (region.isOwner(localPlayer)
+                        && region.getId().contains("areaprotect")
+                        || player
+                                .hasPermission("areaprotect.ap.flag.bypass.owner")
+                        && region.getId().contains("areaprotect")) {
+                    region.setFlag(DefaultFlag.PVP, State.DENY);
+                } else if (!region.getId().contains("areaprotect")) {
+                    PlayerLogger.message(player,
+                            language.getMessage("Player.Flag.Not-Areaprotect"));
+                    return;
+                } else {
+                    PlayerLogger.message(player,
+                            language.getMessage("Player.Flag.Not-Owner"));
+                    return;
+                }
+
+                PlayerLogger.message(player, language.getMessage(
+                        "Player.Flag.Disabled",
+                        new String[] { "%flag%", "pvp" }));
+                continue;
+            }
+        } else {
+            PlayerLogger.message(
+                    player,
+                    language.getMessage("Player.Flag.No-Value", new String[] {
+                            "%flag%", "pvp" }));
+            return;
+        }
+
+        if (Flag.save(regionManager)) {
+            return;
+        } else {
+            PlayerLogger.message(player,
+                    language.getMessage("Player.Flag.Error"));
+            return;
+        }
     }
 
     private static void chestAccess(AreaProtect areaProtect,
