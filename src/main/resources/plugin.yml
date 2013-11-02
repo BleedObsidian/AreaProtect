@@ -19,6 +19,12 @@ permissions:
     areaprotect.ap.create:
         description: Use command /ap create & /ap cancel.
         
+    areaprotect.ap.destroy:
+        description: Destroy an area you own.
+        
+    areaprotect.ap.destroy.bypass.owner:
+        description: Destroy an area you don't own.
+        
     areaprotect.ap.group.bypass.area-limit:
         description: Bypass groups area limit.
         
@@ -27,3 +33,9 @@ permissions:
         
     areaprotect.ap.group.bypass.area-size:
         description: Bypass area height, length and width limits.
+        
+    areaprotect.ap.flag.bypass.owner:
+        description: Set flags in unowned areas.
+        
+    areaprotect.ap.flag.greeting:
+        description: Set greeting flag.

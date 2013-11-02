@@ -57,6 +57,8 @@ public class APCommandExecutor implements CommandExecutor {
             Destroy.destroy(areaProtect, player, args);
         } else if (args[0].equalsIgnoreCase("cancel")) {
             Cancel.cancel(areaProtect, player, args);
+        } else if (args[0].equalsIgnoreCase("flag")) {
+            Flag.flag(areaProtect, player, args);
         } else {
             return false;
         }
