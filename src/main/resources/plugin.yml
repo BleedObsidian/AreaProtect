@@ -42,3 +42,33 @@ permissions:
         
     areaprotect.ap.flag.farewell:
         description: Set farewell flag.
+        
+    areaprotect.ap.flag.pvp:
+        description: Set pvp flag.
+        
+    areaprotect.ap.flag.chest-access:
+        description: Set chest-access flag.
+        
+    areaprotect.ap.flag.entry:
+        description: Set entry flag.
+        
+    areaprotect.ap.flag.send-chat:
+        description: Set send-chat flag.
+        
+    areaprotect.ap.flag.receive-chat:
+        description: Set receive-chat flag.
+        
+    areaprotect.ap.flag.use:
+        description: Set use flag.
+        
+    areaprotect.ap.flag.mob-damage:
+        description: Set mob-damage flag.
+        
+    areaprotect.ap.flag.mob-spawning:
+        description: Set mob-spawning flag.
+        
+    areaprotect.ap.flag.creeper-explosion:
+        description: Set creeper-explosion flag.
+        
+    areaprotect.ap.flag.enderman-grief:
+        description: Set enderman-grief flag.

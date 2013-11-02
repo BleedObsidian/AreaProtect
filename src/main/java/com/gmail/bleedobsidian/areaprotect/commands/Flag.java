@@ -28,7 +28,8 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
-import com.sk89q.worldguard.protection.flags.StateFlag.State;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
@@ -43,37 +44,57 @@ public class Flag {
             return;
         }
 
-        WorldGuardPlugin worldGuard = areaProtect.getWorldGuard()
-                .getWorldGuardPlugin();
-        ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
-                player);
-
         String flag = args[1];
 
         if (flag.equalsIgnoreCase("greeting")) {
-            Flag.greeting(areaProtect, language, player, regions, args);
+            Group playerGroup = areaProtect.getGroupManager().getGroup(player);
+
+            Flag.setStringFlag(areaProtect, language, player, args,
+                    DefaultFlag.GREET_MESSAGE, playerGroup, "Greeting",
+                    "areaprotect.ap.flag.greeting");
         } else if (flag.equalsIgnoreCase("farewell")) {
-            Flag.farewell(areaProtect, language, player, regions, args);
+            Group playerGroup = areaProtect.getGroupManager().getGroup(player);
+
+            Flag.setStringFlag(areaProtect, language, player, args,
+                    DefaultFlag.FAREWELL_MESSAGE, playerGroup, "Farewell",
+                    "areaprotect.ap.flag.farewell");
         } else if (flag.equalsIgnoreCase("pvp")) {
-            Flag.pvp(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.PVP, "PvP", "areaprotect.ap.flag.pvp");
         } else if (flag.equalsIgnoreCase("chest-access")) {
-            Flag.chestAccess(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.CHEST_ACCESS, "Chest-Access",
+                    "areaprotect.ap.flag.chest-access");
         } else if (flag.equalsIgnoreCase("entry")) {
-            Flag.entry(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.ENTRY, "Entry", "areaprotect.ap.flag.entry");
         } else if (flag.equalsIgnoreCase("send-chat")) {
-            Flag.sendChat(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.SEND_CHAT, "Send-Chat",
+                    "areaprotect.ap.flag.send-chat");
         } else if (flag.equalsIgnoreCase("receive-chat")) {
-            Flag.receiveChat(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.RECEIVE_CHAT, "Receive-Chat",
+                    "areaprotect.ap.flag.receive-chat");
         } else if (flag.equalsIgnoreCase("use")) {
-            Flag.use(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.USE, "Use", "areaprotect.ap.flag.use");
         } else if (flag.equalsIgnoreCase("mob-damage")) {
-            Flag.mobDamage(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.MOB_DAMAGE, "Mob-Damage",
+                    "areaprotect.ap.flag.mob-damage");
         } else if (flag.equalsIgnoreCase("mob-spawning")) {
-            Flag.mobSpawning(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.MOB_SPAWNING, "Mob-Spawning",
+                    "areaprotect.ap.flag.mob-spawning");
         } else if (flag.equalsIgnoreCase("creeper-explosion")) {
-            Flag.creeperExplosion(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.CREEPER_EXPLOSION, "Creeper-Explosion",
+                    "areaprotect.ap.flag.creeper-explosion");
         } else if (flag.equalsIgnoreCase("enderman-grief")) {
-            Flag.endermanGrief(areaProtect, language, player, regions, args);
+            Flag.setStateFlag(areaProtect, language, player, args,
+                    DefaultFlag.ENDER_BUILD, "Enderman-Grief",
+                    "areaprotect.ap.flag.enderman-grief");
         } else {
             PlayerLogger.message(
                     player,
@@ -83,10 +104,11 @@ public class Flag {
         }
     }
 
-    private static void greeting(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        if (!player.hasPermission("areaprotect.ap.flag.greeting")) {
+    private static void setStringFlag(AreaProtect areaProtect,
+            LanguageFile language, Player player, String[] args,
+            StringFlag flag, Group playerGroup, String flagName,
+            String flagPermission) {
+        if (!player.hasPermission(flagPermission)) {
             PlayerLogger.message(player,
                     language.getMessage("Player.Flag.Permission"));
             return;
@@ -98,6 +120,8 @@ public class Flag {
         RegionManager regionManager = worldGuard.getRegionManager(player
                 .getWorld());
         LocalPlayer localPlayer = worldGuard.wrapPlayer(player);
+        ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
+                player);
 
         if (value.equalsIgnoreCase("true")) {
             if (regions.size() == 0) {
@@ -112,13 +136,16 @@ public class Flag {
                         || player
                                 .hasPermission("areaprotect.ap.flag.bypass.owner")
                         && region.getId().contains("areaprotect")) {
-                    if (region.getFlag(DefaultFlag.GREET_MESSAGE) == null) {
+                    if (region.getFlag(flag) == null) {
                         String areaName = region.getId().split("/")[2];
-                        Group group = areaProtect.getGroupManager().getGroup(
-                                player);
 
-                        region.setFlag(DefaultFlag.GREET_MESSAGE, group
-                                .getDefaultFlags().getGreetingMessage(areaName));
+                        if (flag.equals(DefaultFlag.GREET_MESSAGE)) {
+                            region.setFlag(flag, playerGroup.getDefaultFlags()
+                                    .getGreetingMessage(areaName));
+                        } else if (flag.equals(DefaultFlag.FAREWELL_MESSAGE)) {
+                            region.setFlag(flag, playerGroup.getDefaultFlags()
+                                    .getFarewellMessage(areaName));
+                        }
                     }
                 } else if (!region.getId().contains("areaprotect")) {
                     PlayerLogger.message(player,
@@ -132,7 +159,7 @@ public class Flag {
 
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Flag.Enabled", new String[] { "%flag%",
-                                "Greeting" }));
+                                flagName }));
                 continue;
             }
         } else if (value.equalsIgnoreCase("false")) {
@@ -148,8 +175,8 @@ public class Flag {
                         || player
                                 .hasPermission("areaprotect.ap.flag.bypass.owner")
                         && region.getId().contains("areaprotect")) {
-                    if (region.getFlag(DefaultFlag.GREET_MESSAGE) != null) {
-                        region.setFlag(DefaultFlag.GREET_MESSAGE, null);
+                    if (region.getFlag(flag) != null) {
+                        region.setFlag(flag, null);
                     }
                 } else if (!region.getId().contains("areaprotect")) {
                     PlayerLogger.message(player,
@@ -163,7 +190,7 @@ public class Flag {
 
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Flag.Disabled", new String[] { "%flag%",
-                                "Greeting" }));
+                                flagName }));
                 continue;
             }
         } else {
@@ -173,23 +200,22 @@ public class Flag {
                 return;
             }
 
-            String message = "";
-            String greetingMessage = "&b[AreaProtect]:&g ";
+            String rawMessage = "";
+            String finalMessage = "&b[AreaProtect]:&g ";
             for (ProtectedRegion region : regions) {
                 if (region.isOwner(localPlayer)
                         && region.getId().contains("areaprotect")
                         || player
                                 .hasPermission("areaprotect.ap.flag.bypass.owner")
                         && region.getId().contains("areaprotect")) {
-                    if (region.getFlag(DefaultFlag.GREET_MESSAGE) != null) {
+                    if (region.getFlag(flag) != null) {
                         for (int i = 2; i < args.length; i++) {
-                            message += args[i] + " ";
+                            rawMessage += args[i] + " ";
                         }
 
-                        greetingMessage += message;
+                        finalMessage += rawMessage;
 
-                        region.setFlag(DefaultFlag.GREET_MESSAGE,
-                                greetingMessage);
+                        region.setFlag(flag, finalMessage);
                     }
                 } else if (!region.getId().contains("areaprotect")) {
                     PlayerLogger.message(player,
@@ -204,7 +230,7 @@ public class Flag {
                 PlayerLogger.message(
                         player,
                         language.getMessage("Player.Flag.Set", new String[] {
-                                "%flag%", "Greeting", "%value%", message }));
+                                "%flag%", flagName, "%value%", rawMessage }));
                 continue;
             }
         }
@@ -218,10 +244,10 @@ public class Flag {
         }
     }
 
-    private static void farewell(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        if (!player.hasPermission("areaprotect.ap.flag.farewell")) {
+    private static void setStateFlag(AreaProtect areaProtect,
+            LanguageFile language, Player player, String[] args,
+            StateFlag flag, String flagName, String flagPermission) {
+        if (!player.hasPermission(flagPermission)) {
             PlayerLogger.message(player,
                     language.getMessage("Player.Flag.Permission"));
             return;
@@ -233,6 +259,8 @@ public class Flag {
         RegionManager regionManager = worldGuard.getRegionManager(player
                 .getWorld());
         LocalPlayer localPlayer = worldGuard.wrapPlayer(player);
+        ApplicableRegionSet regions = Flag.getAreasStandingIn(worldGuard,
+                player);
 
         if (value.equalsIgnoreCase("true")) {
             if (regions.size() == 0) {
@@ -247,14 +275,8 @@ public class Flag {
                         || player
                                 .hasPermission("areaprotect.ap.flag.bypass.owner")
                         && region.getId().contains("areaprotect")) {
-                    if (region.getFlag(DefaultFlag.FAREWELL_MESSAGE) == null) {
-                        String areaName = region.getId().split("/")[2];
-                        Group group = areaProtect.getGroupManager().getGroup(
-                                player);
 
-                        region.setFlag(DefaultFlag.FAREWELL_MESSAGE, group
-                                .getDefaultFlags().getFarewellMessage(areaName));
-                    }
+                    region.setFlag(flag, StateFlag.State.ALLOW);
                 } else if (!region.getId().contains("areaprotect")) {
                     PlayerLogger.message(player,
                             language.getMessage("Player.Flag.Not-Areaprotect"));
@@ -267,7 +289,7 @@ public class Flag {
 
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Flag.Enabled", new String[] { "%flag%",
-                                "Farewell" }));
+                                flagName }));
                 continue;
             }
         } else if (value.equalsIgnoreCase("false")) {
@@ -283,9 +305,7 @@ public class Flag {
                         || player
                                 .hasPermission("areaprotect.ap.flag.bypass.owner")
                         && region.getId().contains("areaprotect")) {
-                    if (region.getFlag(DefaultFlag.FAREWELL_MESSAGE) != null) {
-                        region.setFlag(DefaultFlag.FAREWELL_MESSAGE, null);
-                    }
+                    region.setFlag(flag, StateFlag.State.DENY);
                 } else if (!region.getId().contains("areaprotect")) {
                     PlayerLogger.message(player,
                             language.getMessage("Player.Flag.Not-Areaprotect"));
@@ -298,140 +318,14 @@ public class Flag {
 
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Flag.Disabled", new String[] { "%flag%",
-                                "Farewell" }));
-                continue;
-            }
-        } else {
-            if (regions.size() == 0) {
-                PlayerLogger.message(player,
-                        language.getMessage("Player.Flag.Not-In-Area"));
-                return;
-            }
-
-            String message = "";
-            String greetingMessage = "&b[AreaProtect]:&g ";
-            for (ProtectedRegion region : regions) {
-                if (region.isOwner(localPlayer)
-                        && region.getId().contains("areaprotect")
-                        || player
-                                .hasPermission("areaprotect.ap.flag.bypass.owner")
-                        && region.getId().contains("areaprotect")) {
-                    if (region.getFlag(DefaultFlag.FAREWELL_MESSAGE) != null) {
-                        for (int i = 2; i < args.length; i++) {
-                            message += args[i] + " ";
-                        }
-
-                        greetingMessage += message;
-
-                        region.setFlag(DefaultFlag.FAREWELL_MESSAGE,
-                                greetingMessage);
-                    }
-                } else if (!region.getId().contains("areaprotect")) {
-                    PlayerLogger.message(player,
-                            language.getMessage("Player.Flag.Not-Areaprotect"));
-                    return;
-                } else {
-                    PlayerLogger.message(player,
-                            language.getMessage("Player.Flag.Not-Owner"));
-                    return;
-                }
-
-                PlayerLogger.message(
-                        player,
-                        language.getMessage("Player.Flag.Set", new String[] {
-                                "%flag%", "Farewell", "%value%", message }));
-                continue;
-            }
-        }
-
-        if (Flag.save(regionManager)) {
-            return;
-        } else {
-            PlayerLogger.message(player,
-                    language.getMessage("Player.Flag.Error"));
-            return;
-        }
-    }
-
-    private static void pvp(AreaProtect areaProtect, LanguageFile language,
-            Player player, ApplicableRegionSet regions, String[] args) {
-        if (!player.hasPermission("areaprotect.ap.flag.pvp")) {
-            PlayerLogger.message(player,
-                    language.getMessage("Player.Flag.Permission"));
-            return;
-        }
-
-        String value = args[2];
-        WorldGuardPlugin worldGuard = areaProtect.getWorldGuard()
-                .getWorldGuardPlugin();
-        RegionManager regionManager = worldGuard.getRegionManager(player
-                .getWorld());
-        LocalPlayer localPlayer = worldGuard.wrapPlayer(player);
-
-        if (value.equalsIgnoreCase("true")) {
-            if (regions.size() == 0) {
-                PlayerLogger.message(player,
-                        language.getMessage("Player.Flag.Not-In-Area"));
-                return;
-            }
-
-            for (ProtectedRegion region : regions) {
-                if (region.isOwner(localPlayer)
-                        && region.getId().contains("areaprotect")
-                        || player
-                                .hasPermission("areaprotect.ap.flag.bypass.owner")
-                        && region.getId().contains("areaprotect")) {
-
-                    region.setFlag(DefaultFlag.PVP, State.ALLOW);
-                } else if (!region.getId().contains("areaprotect")) {
-                    PlayerLogger.message(player,
-                            language.getMessage("Player.Flag.Not-Areaprotect"));
-                    return;
-                } else {
-                    PlayerLogger.message(player,
-                            language.getMessage("Player.Flag.Not-Owner"));
-                    return;
-                }
-
-                PlayerLogger.message(player, language
-                        .getMessage("Player.Flag.Enabled", new String[] {
-                                "%flag%", "pvp" }));
-                continue;
-            }
-        } else if (value.equalsIgnoreCase("false")) {
-            if (regions.size() == 0) {
-                PlayerLogger.message(player,
-                        language.getMessage("Player.Flag.Not-In-Area"));
-                return;
-            }
-
-            for (ProtectedRegion region : regions) {
-                if (region.isOwner(localPlayer)
-                        && region.getId().contains("areaprotect")
-                        || player
-                                .hasPermission("areaprotect.ap.flag.bypass.owner")
-                        && region.getId().contains("areaprotect")) {
-                    region.setFlag(DefaultFlag.PVP, State.DENY);
-                } else if (!region.getId().contains("areaprotect")) {
-                    PlayerLogger.message(player,
-                            language.getMessage("Player.Flag.Not-Areaprotect"));
-                    return;
-                } else {
-                    PlayerLogger.message(player,
-                            language.getMessage("Player.Flag.Not-Owner"));
-                    return;
-                }
-
-                PlayerLogger.message(player, language.getMessage(
-                        "Player.Flag.Disabled",
-                        new String[] { "%flag%", "pvp" }));
+                                flagName }));
                 continue;
             }
         } else {
             PlayerLogger.message(
                     player,
                     language.getMessage("Player.Flag.No-Value", new String[] {
-                            "%flag%", "pvp" }));
+                            "%flag%", flagName }));
             return;
         }
 
@@ -442,58 +336,6 @@ public class Flag {
                     language.getMessage("Player.Flag.Error"));
             return;
         }
-    }
-
-    private static void chestAccess(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        return;
-    }
-
-    private static void entry(AreaProtect areaProtect, LanguageFile language,
-            Player player, ApplicableRegionSet regions, String[] args) {
-        return;
-    }
-
-    private static void sendChat(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        return;
-    }
-
-    private static void receiveChat(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        return;
-    }
-
-    private static void use(AreaProtect areaProtect, LanguageFile language,
-            Player player, ApplicableRegionSet regions, String[] args) {
-        return;
-    }
-
-    private static void mobDamage(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        return;
-    }
-
-    private static void mobSpawning(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        return;
-    }
-
-    private static void creeperExplosion(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        return;
-    }
-
-    private static void endermanGrief(AreaProtect areaProtect,
-            LanguageFile language, Player player, ApplicableRegionSet regions,
-            String[] args) {
-        return;
     }
 
     private static ApplicableRegionSet getAreasStandingIn(
