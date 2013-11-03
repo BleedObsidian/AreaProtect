@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.commands.listeners;
+package com.gmail.bleedobsidian.areaprotect.command.listeners;
 
 import net.milkbowl.vault.economy.EconomyResponse;
 
@@ -26,9 +26,9 @@ import com.gmail.bleedobsidian.areaprotect.AreaProtect;
 import com.gmail.bleedobsidian.areaprotect.Group;
 import com.gmail.bleedobsidian.areaprotect.Language;
 import com.gmail.bleedobsidian.areaprotect.Selection;
-import com.gmail.bleedobsidian.areaprotect.configuration.LanguageFile;
+import com.gmail.bleedobsidian.areaprotect.configurations.LanguageFile;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
-import com.gmail.bleedobsidian.areaprotect.manager.interfaces.SelectionListener;
+import com.gmail.bleedobsidian.areaprotect.managers.interfaces.SelectionListener;
 import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldguard.LocalPlayer;

@@ -15,13 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.commands;
+package com.gmail.bleedobsidian.areaprotect.command.commands;
 
 import org.bukkit.entity.Player;
 
 import com.gmail.bleedobsidian.areaprotect.AreaProtect;
 import com.gmail.bleedobsidian.areaprotect.Language;
-import com.gmail.bleedobsidian.areaprotect.configuration.LanguageFile;
+import com.gmail.bleedobsidian.areaprotect.configurations.LanguageFile;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -31,12 +31,12 @@ import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-public class RemoveMember {
-    public static void removeMember(AreaProtect areaProtect, Player player,
+public class AddMember {
+    public static void addMember(AreaProtect areaProtect, Player player,
             String[] args) {
         LanguageFile language = Language.getLanguageFile();
 
-        if (!player.hasPermission("areaprotect.ap.removemember")) {
+        if (!player.hasPermission("areaprotect.ap.addmember")) {
             PlayerLogger.message(player,
                     language.getMessage("Player.Permission"));
             return;
@@ -44,25 +44,25 @@ public class RemoveMember {
 
         if (!(args.length >= 2)) {
             PlayerLogger.message(player,
-                    language.getMessage("Player.RemoveMember.Usage"));
+                    language.getMessage("Player.AddMember.Usage"));
             return;
         }
 
         WorldGuardPlugin worldGuard = areaProtect.getWorldGuard()
                 .getWorldGuardPlugin();
-
         RegionManager regionManager = worldGuard.getRegionManager(player
                 .getWorld());
         LocalPlayer localPlayer = worldGuard.wrapPlayer(player);
-        ApplicableRegionSet regions = regionManager.getApplicableRegions(player
-                .getLocation());
 
         String memberName;
 
         if (args.length == 2) {
+            ApplicableRegionSet regions = regionManager
+                    .getApplicableRegions(player.getLocation());
+
             if (regions.size() == 0) {
                 PlayerLogger.message(player,
-                        language.getMessage("Player.RemoveMember.Not-In-Area"));
+                        language.getMessage("Player.AddMember.Not-In-Area"));
                 return;
             }
 
@@ -71,36 +71,36 @@ public class RemoveMember {
             for (ProtectedRegion region : regions) {
                 if (!region.isOwner(localPlayer)
                         && !player
-                                .hasPermission("areaprotect.ap.removemember.bypass.owner")) {
-                    PlayerLogger.message(player, language
-                            .getMessage("Player.RemoveMember.Not-Owner"));
+                                .hasPermission("areaprotect.ap.addmember.bypass.owner")) {
+                    PlayerLogger.message(player,
+                            language.getMessage("Player.AddMember.Not-Owner"));
                     return;
                 }
 
                 if (!region.getId().contains("areaprotect")) {
                     PlayerLogger.message(player, language
-                            .getMessage("Player.RemoveMember.Not-Areaprotect"));
+                            .getMessage("Player.AddMember.Not-Areaprotect"));
                     return;
                 }
 
                 if (!areaProtect.getServer().getOfflinePlayer(memberName)
                         .hasPlayedBefore()) {
                     PlayerLogger.message(player, language.getMessage(
-                            "Player.RemoveMember.No-Player", new String[] {
+                            "Player.AddMember.No-Player", new String[] {
                                     "%player%", memberName }));
                     return;
                 }
 
                 DefaultDomain members = region.getMembers();
 
-                if (!members.contains(memberName)) {
+                if (members.contains(memberName)) {
                     PlayerLogger.message(player, language.getMessage(
-                            "Player.RemoveMember.No-Member", new String[] {
+                            "Player.AddMember.Already-Member", new String[] {
                                     "%player%", memberName }));
                     return;
                 }
 
-                members.removePlayer(memberName);
+                members.addPlayer(memberName);
                 region.setMembers(members);
             }
         } else {
@@ -110,7 +110,7 @@ public class RemoveMember {
 
             if (region == null) {
                 PlayerLogger.message(player, language.getMessage(
-                        "Player.RemoveMember.Invalid-Name", new String[] {
+                        "Player.AddMember.Invalid-Name", new String[] {
                                 "%Area_Name%", args[1] }));
                 return;
             }
@@ -120,33 +120,33 @@ public class RemoveMember {
             if (!areaProtect.getServer().getOfflinePlayer(memberName)
                     .hasPlayedBefore()) {
                 PlayerLogger.message(player, language.getMessage(
-                        "Player.RemoveMember.No-Player", new String[] {
+                        "Player.AddMember.No-Player", new String[] {
                                 "%player%", memberName }));
                 return;
             }
 
             DefaultDomain members = region.getMembers();
 
-            if (!members.contains(memberName)) {
+            if (members.contains(memberName)) {
                 PlayerLogger.message(player, language.getMessage(
-                        "Player.RemoveMember.No-Member", new String[] {
+                        "Player.AddMember.Already-Member", new String[] {
                                 "%player%", memberName }));
                 return;
             }
 
-            members.removePlayer(memberName);
+            members.addPlayer(memberName);
             region.setMembers(members);
         }
 
         try {
             regionManager.save();
             PlayerLogger.message(player, language.getMessage(
-                    "Player.RemoveMember.Successful", new String[] {
-                            "%player%", memberName }));
+                    "Player.AddMember.Successful", new String[] { "%player%",
+                            memberName }));
             return;
         } catch (ProtectionDatabaseException e) {
             PlayerLogger.message(player,
-                    language.getMessage("Player.RemoveMember.Error"));
+                    language.getMessage("Player.AddMember.Error"));
             return;
         }
     }

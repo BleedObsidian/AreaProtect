@@ -30,7 +30,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import com.gmail.bleedobsidian.areaprotect.Language;
 import com.gmail.bleedobsidian.areaprotect.Selection;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
-import com.gmail.bleedobsidian.areaprotect.manager.SelectionManager;
+import com.gmail.bleedobsidian.areaprotect.managers.SelectionManager;
 
 public class BlockListener implements Listener {
     private SelectionManager selectionManager;

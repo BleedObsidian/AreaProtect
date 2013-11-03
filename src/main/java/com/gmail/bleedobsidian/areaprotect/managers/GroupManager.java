@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.manager;
+package com.gmail.bleedobsidian.areaprotect.managers;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -26,7 +26,7 @@ import org.bukkit.entity.Player;
 
 import com.gmail.bleedobsidian.areaprotect.FlagSet;
 import com.gmail.bleedobsidian.areaprotect.Group;
-import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
+import com.gmail.bleedobsidian.areaprotect.configurations.ConfigFile;
 
 public class GroupManager {
     private ConfigFile groupFile;

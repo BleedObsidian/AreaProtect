@@ -1,6 +1,6 @@
 package com.gmail.bleedobsidian.areaprotect.metrics;
 
-import com.gmail.bleedobsidian.areaprotect.configuration.ConfigFile;
+import com.gmail.bleedobsidian.areaprotect.configurations.ConfigFile;
 import com.gmail.bleedobsidian.areaprotect.metrics.Metrics.Graph;
 
 public class Graphs {

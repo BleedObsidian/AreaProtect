@@ -15,22 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect;
+package com.gmail.bleedobsidian.areaprotect.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.gmail.bleedobsidian.areaprotect.commands.AddMember;
-import com.gmail.bleedobsidian.areaprotect.commands.AddOwner;
-import com.gmail.bleedobsidian.areaprotect.commands.Cancel;
-import com.gmail.bleedobsidian.areaprotect.commands.Create;
-import com.gmail.bleedobsidian.areaprotect.commands.Destroy;
-import com.gmail.bleedobsidian.areaprotect.commands.Flag;
-import com.gmail.bleedobsidian.areaprotect.commands.Info;
-import com.gmail.bleedobsidian.areaprotect.commands.RemoveMember;
-import com.gmail.bleedobsidian.areaprotect.commands.RemoveOwner;
+import com.gmail.bleedobsidian.areaprotect.AreaProtect;
+import com.gmail.bleedobsidian.areaprotect.Language;
+import com.gmail.bleedobsidian.areaprotect.command.commands.AddMember;
+import com.gmail.bleedobsidian.areaprotect.command.commands.AddOwner;
+import com.gmail.bleedobsidian.areaprotect.command.commands.Cancel;
+import com.gmail.bleedobsidian.areaprotect.command.commands.Create;
+import com.gmail.bleedobsidian.areaprotect.command.commands.Destroy;
+import com.gmail.bleedobsidian.areaprotect.command.commands.Flag;
+import com.gmail.bleedobsidian.areaprotect.command.commands.Info;
+import com.gmail.bleedobsidian.areaprotect.command.commands.RemoveMember;
+import com.gmail.bleedobsidian.areaprotect.command.commands.RemoveOwner;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
 
 public class APCommandExecutor implements CommandExecutor {

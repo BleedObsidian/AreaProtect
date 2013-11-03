@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.configuration;
+package com.gmail.bleedobsidian.areaprotect.configurations;
 
 import java.io.InputStream;
 

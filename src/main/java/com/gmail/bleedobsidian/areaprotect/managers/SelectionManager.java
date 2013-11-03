@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.manager;
+package com.gmail.bleedobsidian.areaprotect.managers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +26,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.bleedobsidian.areaprotect.Selection;
 import com.gmail.bleedobsidian.areaprotect.listeners.BlockListener;
-import com.gmail.bleedobsidian.areaprotect.manager.interfaces.SelectionListener;
+import com.gmail.bleedobsidian.areaprotect.managers.interfaces.SelectionListener;
 
 public class SelectionManager {
     private BlockListener blockListener;

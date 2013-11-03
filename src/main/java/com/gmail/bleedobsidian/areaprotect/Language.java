@@ -19,7 +19,7 @@ package com.gmail.bleedobsidian.areaprotect;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.gmail.bleedobsidian.areaprotect.configuration.LanguageFile;
+import com.gmail.bleedobsidian.areaprotect.configurations.LanguageFile;
 
 public class Language {
     private static LanguageFile languageFile;

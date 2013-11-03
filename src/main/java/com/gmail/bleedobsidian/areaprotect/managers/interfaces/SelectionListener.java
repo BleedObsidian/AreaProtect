@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.manager.interfaces;
+package com.gmail.bleedobsidian.areaprotect.managers.interfaces;
 
 import org.bukkit.entity.Player;
 

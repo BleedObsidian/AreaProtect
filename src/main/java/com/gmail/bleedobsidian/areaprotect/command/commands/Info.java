@@ -15,14 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/gpl.html>.
  */
 
-package com.gmail.bleedobsidian.areaprotect.commands;
+package com.gmail.bleedobsidian.areaprotect.command.commands;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import com.gmail.bleedobsidian.areaprotect.AreaProtect;
 import com.gmail.bleedobsidian.areaprotect.Language;
-import com.gmail.bleedobsidian.areaprotect.configuration.LanguageFile;
+import com.gmail.bleedobsidian.areaprotect.configurations.LanguageFile;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
