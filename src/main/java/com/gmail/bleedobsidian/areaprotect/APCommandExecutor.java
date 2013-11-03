@@ -28,6 +28,7 @@ import com.gmail.bleedobsidian.areaprotect.commands.Cancel;
 import com.gmail.bleedobsidian.areaprotect.commands.Create;
 import com.gmail.bleedobsidian.areaprotect.commands.Destroy;
 import com.gmail.bleedobsidian.areaprotect.commands.Flag;
+import com.gmail.bleedobsidian.areaprotect.commands.Info;
 import com.gmail.bleedobsidian.areaprotect.commands.RemoveMember;
 import com.gmail.bleedobsidian.areaprotect.commands.RemoveOwner;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
@@ -73,6 +74,8 @@ public class APCommandExecutor implements CommandExecutor {
             AddOwner.addOwner(areaProtect, player, args);
         } else if (args[0].equalsIgnoreCase("removeowner")) {
             RemoveOwner.removeOwner(areaProtect, player, args);
+        } else if (args[0].equalsIgnoreCase("info")) {
+            Info.info(areaProtect, player, args);
         } else {
             return false;
         }

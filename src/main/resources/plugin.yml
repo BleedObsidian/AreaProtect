@@ -57,6 +57,18 @@ permissions:
     
     areaprotect.ap.removeowner.bypass.owner:
         description: Remove an owner from an area you don't own.
+        
+    areaprotect.ap.info.area:
+        description: Get information about an area.
+        
+    areaprotect.ap.info.area.bypass.owner:
+        description: Get information about an area you don't own.
+        
+    areaprotect.ap.info.player:
+        description: Get information about yourself.
+        
+    areaprotect.ap.info.player.other:
+        description: Get information about another player.
      
     areaprotect.ap.flag.bypass.owner:
         description: Set flags in unowned areas.
