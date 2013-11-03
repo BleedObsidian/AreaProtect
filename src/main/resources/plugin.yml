@@ -52,6 +52,12 @@ permissions:
     areaprotect.ap.addowner.bypass.owner:
         description: Add an owner to an area you don't own.
      
+    areaprotect.ap.removeowner:
+        description: Remove an owner from an area.
+    
+    areaprotect.ap.removeowner.bypass.owner:
+        description: Remove an owner from an area you don't own.
+     
     areaprotect.ap.flag.bypass.owner:
         description: Set flags in unowned areas.
         
