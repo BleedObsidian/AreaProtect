@@ -62,7 +62,7 @@ public class Update {
                 NodeList firstNodes = firstNameElement.getChildNodes();
 
                 return firstNodes.item(0).getNodeValue()
-                        .replace("Showcase V", "");
+                        .replace("AreaProtect V", "");
             } else {
                 throw new Exception("Failed to get first node.");
             }
