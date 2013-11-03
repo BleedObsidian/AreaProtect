@@ -34,6 +34,12 @@ permissions:
     areaprotect.ap.group.bypass.area-size:
         description: Bypass area height, length and width limits.
         
+    areaprotect.ap.addmember:
+        description: Add a member to an area.
+    
+    areaprotect.ap.addmember.bypass.owner:
+        description: Add a member to an area you don't own.
+        
     areaprotect.ap.flag.bypass.owner:
         description: Set flags in unowned areas.
         

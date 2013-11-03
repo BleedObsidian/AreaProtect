@@ -22,6 +22,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.gmail.bleedobsidian.areaprotect.commands.AddMember;
 import com.gmail.bleedobsidian.areaprotect.commands.Cancel;
 import com.gmail.bleedobsidian.areaprotect.commands.Create;
 import com.gmail.bleedobsidian.areaprotect.commands.Destroy;
@@ -61,6 +62,8 @@ public class APCommandExecutor implements CommandExecutor {
             Cancel.cancel(areaProtect, player, args);
         } else if (args[0].equalsIgnoreCase("flag")) {
             Flag.flag(areaProtect, player, args);
+        } else if (args[0].equalsIgnoreCase("addmember")) {
+            AddMember.addMember(areaProtect, player, args);
         } else {
             return false;
         }
