@@ -65,12 +65,20 @@ public class AreaProtect extends JavaPlugin {
         // Set Language
         String locale = this.config.getFileConfiguration().getString("Locale");
 
-        if (Language.exists(locale)) {
-            Language.setLangauge(locale + ".yml", this);
+        if (locale != null) {
+            if (Language.exists(locale)) {
+                Language.setLangauge(locale + ".yml", this);
+            } else {
+                PluginLogger.warning("Failed to find locale: " + locale
+                        + ", using en-us instead.", true);
+                Language.setLangauge("en-us.yml", this);
+            }
         } else {
-            PluginLogger.warning("Failed to find locale: " + locale
-                    + ", using en-us instead.", true);
-            Language.setLangauge("en-us.yml", this);
+            PluginLogger
+                    .warning(
+                            "Old AreaProtect config file detected, please delete it and restart the server.",
+                            true);
+            return;
         }
 
         // Check For Update
