@@ -176,9 +176,11 @@ public class AreaProtect extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        PluginLogger.info(Language.getLanguageFile().getMessage(
-                "Console.Disabled",
-                new String[] { "%Version%", this.getVersion() }));
+        if (Language.getLanguageFile() != null) {
+            PluginLogger.info(Language.getLanguageFile().getMessage(
+                    "Console.Disabled",
+                    new String[] { "%Version%", this.getVersion() }));
+        }
     }
 
     public GroupManager getGroupManager() {
