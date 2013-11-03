@@ -27,6 +27,7 @@ import com.gmail.bleedobsidian.areaprotect.commands.Cancel;
 import com.gmail.bleedobsidian.areaprotect.commands.Create;
 import com.gmail.bleedobsidian.areaprotect.commands.Destroy;
 import com.gmail.bleedobsidian.areaprotect.commands.Flag;
+import com.gmail.bleedobsidian.areaprotect.commands.RemoveMember;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
 
 public class APCommandExecutor implements CommandExecutor {
@@ -64,6 +65,8 @@ public class APCommandExecutor implements CommandExecutor {
             Flag.flag(areaProtect, player, args);
         } else if (args[0].equalsIgnoreCase("addmember")) {
             AddMember.addMember(areaProtect, player, args);
+        } else if (args[0].equalsIgnoreCase("removemember")) {
+            RemoveMember.removeMember(areaProtect, player, args);
         } else {
             return false;
         }
