@@ -20,6 +20,7 @@ package com.gmail.bleedobsidian.areaprotect.manager;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
@@ -100,6 +101,17 @@ public class GroupManager {
     public Group getGroup(Player player) {
         for (String groupName : this.groups.keySet()) {
             if (player.hasPermission("areaprotect.group." + groupName)) {
+                return this.groups.get(groupName);
+            }
+        }
+
+        return this.defaultGroup;
+    }
+
+    public Group getGroup(OfflinePlayer player) {
+        for (String groupName : this.groups.keySet()) {
+            if (player.getPlayer().hasPermission(
+                    "areaprotect.group." + groupName)) {
                 return this.groups.get(groupName);
             }
         }
