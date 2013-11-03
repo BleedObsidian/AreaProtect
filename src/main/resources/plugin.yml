@@ -45,7 +45,13 @@ permissions:
     
     areaprotect.ap.removemember.bypass.owner:
         description: Remove a member from an area you don't own.
-        
+     
+    areaprotect.ap.addowner:
+        description: Add an owner to an area.
+    
+    areaprotect.ap.addowner.bypass.owner:
+        description: Add an owner to an area you don't own.
+     
     areaprotect.ap.flag.bypass.owner:
         description: Set flags in unowned areas.
         
