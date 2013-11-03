@@ -108,3 +108,6 @@ permissions:
         
     areaprotect.ap.flag.enderman-grief:
         description: Set enderman-grief flag.
+        
+    areaprotect.ap.help:
+        description: View all commands and what they do.
