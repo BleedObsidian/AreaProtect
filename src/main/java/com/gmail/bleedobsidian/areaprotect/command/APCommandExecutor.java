@@ -27,6 +27,7 @@ import com.gmail.bleedobsidian.areaprotect.Language;
 import com.gmail.bleedobsidian.areaprotect.command.commands.AddMember;
 import com.gmail.bleedobsidian.areaprotect.command.commands.AddOwner;
 import com.gmail.bleedobsidian.areaprotect.command.commands.Cancel;
+import com.gmail.bleedobsidian.areaprotect.command.commands.Convert;
 import com.gmail.bleedobsidian.areaprotect.command.commands.Create;
 import com.gmail.bleedobsidian.areaprotect.command.commands.Destroy;
 import com.gmail.bleedobsidian.areaprotect.command.commands.Flag;
@@ -56,7 +57,12 @@ public class APCommandExecutor implements CommandExecutor {
                 return true;
             }
         } else {
-            return false;
+            if (args[0].equalsIgnoreCase("convert")) {
+                Convert.convert(sender, areaProtect);
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

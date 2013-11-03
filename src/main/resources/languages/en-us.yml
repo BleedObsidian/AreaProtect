@@ -134,5 +134,9 @@ Player:
         Message12: "(GREEN)------------------------------"
         Message13: "(GREEN)Visit: (GOLD)http://dev.bukkit.org/server-mods/areaprotect/ (GREEN)for more."
         Message14: "(GREEN)------------------------------"
+    Convert:
+        Converting: "Converting Regions..."
+        Converted: "Converted Regions."
+        Error: "Error Converting Regions!"
     Permission: "(RED)You don't have permission to use this command."
     Syntax-Error: "(RED)Invalid Command. Use (GOLD)/ap help(RED) for help."
