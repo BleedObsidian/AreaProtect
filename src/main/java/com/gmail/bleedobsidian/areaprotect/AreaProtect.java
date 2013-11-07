@@ -84,9 +84,35 @@ public class AreaProtect extends JavaPlugin {
         // Check For Update
         if (this.config.getFileConfiguration().getBoolean(
                 "Updates.Check-For-Update")) {
-            if (Update.isNewVersionAvailable(this)) {
-                PluginLogger.warning(Language.getLanguageFile().getMessage(
-                        "Console.Update-Available"));
+            String apiKey = this.config.getFileConfiguration().getString(
+                    "Updates.API-Key");
+            Updater updater;
+
+            if (apiKey != null) {
+                if (apiKey.equals("")
+                        || apiKey.equalsIgnoreCase("your_api_key")) {
+                    updater = new Updater(this, 46167);
+                } else {
+                    updater = new Updater(this, 46167, apiKey);
+                }
+            } else {
+                updater = new Updater(this, 46167);
+            }
+
+            if (updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE) {
+                PluginLogger
+                        .warning("A new version of AreaProtect is available!");
+            } else if (updater.getResult() != Updater.UpdateResult.NO_UPDATE) {
+                if (updater.getResult() == Updater.UpdateResult.ERROR_APIKEY) {
+                    PluginLogger.warning("Failed to check for updates!", true);
+                    PluginLogger.warning("Your API key may be wrong.", true);
+                } else if (updater.getResult() == Updater.UpdateResult.ERROR_SERVER) {
+                    PluginLogger.warning("Failed to check for updates!", true);
+                    PluginLogger.warning("Failed to connect to server!", true);
+                } else if (updater.getResult() == Updater.UpdateResult.ERROR_VERSION) {
+                    PluginLogger.warning("Failed to check for updates!", true);
+                    PluginLogger.warning("Invalid data in output!", true);
+                }
             }
         }
 

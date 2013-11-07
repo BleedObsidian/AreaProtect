@@ -9,6 +9,9 @@ Locale: en-us
 # If AreaProtect should use Vault and make players pay for areas.
 Use-Vault: false
 
+#Update options
 Updates:
     # Notify if an update is available. (Recommended)
     Check-For-Update: true
+    # Use a custom API key for the ServerMods API. (Optional)
+    API-Key: your_api_key
