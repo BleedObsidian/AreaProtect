@@ -191,7 +191,7 @@ public class Flag {
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Flag.Disabled", new String[] { "%flag%",
                                 flagName }));
-                continue;
+                break;
             }
         } else {
             if (regions.size() == 0) {
@@ -231,7 +231,7 @@ public class Flag {
                         player,
                         language.getMessage("Player.Flag.Set", new String[] {
                                 "%flag%", flagName, "%value%", rawMessage }));
-                continue;
+                break;
             }
         }
 
@@ -290,7 +290,7 @@ public class Flag {
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Flag.Enabled", new String[] { "%flag%",
                                 flagName }));
-                continue;
+                break;
             }
         } else if (value.equalsIgnoreCase("false")) {
             if (regions.size() == 0) {
@@ -319,7 +319,7 @@ public class Flag {
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Flag.Disabled", new String[] { "%flag%",
                                 flagName }));
-                continue;
+                break;
             }
         } else {
             PlayerLogger.message(
