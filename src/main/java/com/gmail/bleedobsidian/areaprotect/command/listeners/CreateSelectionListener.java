@@ -60,10 +60,16 @@ public class CreateSelectionListener implements SelectionListener {
                 .getWorld());
         LocalPlayer localPlayer = worldGuard.wrapPlayer(player);
 
-        BlockVector blockA = new BlockVector(a.getBlockX(), a.getBlockY(),
-                a.getBlockZ());
-        BlockVector blockB = new BlockVector(b.getBlockX(), b.getBlockY(),
-                b.getBlockZ());
+        BlockVector blockA, blockB;
+        if (this.areaProtect.getConfig().getBoolean("Include-Height")) {
+            blockA = new BlockVector(a.getBlockX(), a.getBlockY(),
+                    a.getBlockZ());
+            blockB = new BlockVector(b.getBlockX(), b.getBlockY(),
+                    b.getBlockZ());
+        } else {
+            blockA = new BlockVector(a.getBlockX(), 0, a.getBlockZ());
+            blockB = new BlockVector(b.getBlockX(), 255, b.getBlockZ());
+        }
 
         ProtectedCuboidRegion region = new ProtectedCuboidRegion(regionName,
                 blockA, blockB);
