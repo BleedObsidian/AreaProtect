@@ -49,8 +49,14 @@ public class APCommandExecutor implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
 
-            if (this.proccessCommand(player, args)) {
-                return true;
+            if (args.length >= 1) {
+                if (this.proccessCommand(player, args)) {
+                    return true;
+                } else {
+                    PlayerLogger.message(player, Language.getLanguageFile()
+                            .getMessage("Player.Syntax-Error"));
+                    return true;
+                }
             } else {
                 PlayerLogger.message(player, Language.getLanguageFile()
                         .getMessage("Player.Syntax-Error"));
