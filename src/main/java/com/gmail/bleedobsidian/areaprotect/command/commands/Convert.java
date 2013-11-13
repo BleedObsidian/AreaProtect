@@ -63,19 +63,30 @@ public class Convert {
                             ProtectedCuboidRegion region = (ProtectedCuboidRegion) entry
                                     .getValue();
 
-                            String newAreaName = "areaprotect/"
-                                    + player.getName() + "/"
-                                    + region.getId().split("-")[1];
+                            try {
+                                String newAreaName = "areaprotect/"
+                                        + player.getName() + "/"
+                                        + region.getId().split("-")[1];
 
-                            ProtectedCuboidRegion newRegion = new ProtectedCuboidRegion(
-                                    newAreaName, region.getMinimumPoint(),
-                                    region.getMaximumPoint());
-                            newRegion.setFlags(region.getFlags());
-                            newRegion.setOwners(region.getOwners());
-                            newRegion.setMembers(region.getMembers());
+                                ProtectedCuboidRegion newRegion = new ProtectedCuboidRegion(
+                                        newAreaName, region.getMinimumPoint(),
+                                        region.getMaximumPoint());
+                                newRegion.setFlags(region.getFlags());
+                                newRegion.setOwners(region.getOwners());
+                                newRegion.setMembers(region.getMembers());
 
-                            regionManager.addRegion(newRegion);
-                            regionManager.removeRegion(region.getId());
+                                regionManager.addRegion(newRegion);
+                                regionManager.removeRegion(region.getId());
+                            } catch (ArrayIndexOutOfBoundsException e) {
+                                PluginLogger.warning(language
+                                        .getMessage("Player.Convert.Error"));
+                                PluginLogger
+                                        .warning(language.getMessage(
+                                                "Player.Convert.Name",
+                                                new String[] { "%area_name%",
+                                                        region.getId() }), true);
+                                return;
+                            }
                         }
                     }
                 }

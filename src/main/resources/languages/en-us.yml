@@ -137,6 +137,7 @@ Player:
     Convert:
         Converting: "Converting Regions..."
         Converted: "Converted Regions."
+        Name: "Failed to convert area '%area_name%'!"
         Error: "Error Converting Regions!"
     Permission: "(RED)You don't have permission to use this command."
     Syntax-Error: "(RED)Invalid Command. Use (GOLD)/ap help(RED) for help."
