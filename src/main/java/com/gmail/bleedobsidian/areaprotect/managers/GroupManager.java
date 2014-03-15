@@ -51,6 +51,7 @@ public class GroupManager {
             int maximumHeight = groupSection.getInt("Maximum-Height");
             int maximumLength = groupSection.getInt("Maximum-Length");
             int maximumWidth = groupSection.getInt("Maximum-Width");
+            int maximumRadius = groupSection.getInt("Maximum-Radius");
             boolean payPerBlock = groupSection.getBoolean("Pay-Per-Block");
             double price = groupSection.getDouble("Price");
 
@@ -83,8 +84,8 @@ public class GroupManager {
                     .getBoolean("Flags.Enderman-Grief"));
 
             Group group = new Group(groupName, maximumAreas, maximumHeight,
-                    maximumLength, maximumWidth, payPerBlock, price,
-                    defaultFlags);
+                    maximumLength, maximumWidth, maximumRadius, payPerBlock,
+                    price, defaultFlags);
 
             if (groupName.equalsIgnoreCase("Default")) {
                 this.defaultGroup = group;

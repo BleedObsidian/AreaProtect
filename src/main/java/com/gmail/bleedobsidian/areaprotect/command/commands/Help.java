@@ -42,6 +42,8 @@ public class Help {
         PlayerLogger.message(player,
                 language.getMessage("Player.Help.Message3"));
         PlayerLogger.message(player,
+                language.getMessage("Player.Help.Message15"));
+        PlayerLogger.message(player,
                 language.getMessage("Player.Help.Message4"));
         PlayerLogger.message(player,
                 language.getMessage("Player.Help.Message5"));

@@ -17,11 +17,13 @@
 
 package com.gmail.bleedobsidian.areaprotect.command.commands;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.gmail.bleedobsidian.areaprotect.AreaProtect;
 import com.gmail.bleedobsidian.areaprotect.Group;
 import com.gmail.bleedobsidian.areaprotect.Language;
+import com.gmail.bleedobsidian.areaprotect.Selection;
 import com.gmail.bleedobsidian.areaprotect.command.listeners.CreateSelectionListener;
 import com.gmail.bleedobsidian.areaprotect.configurations.LanguageFile;
 import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
@@ -41,7 +43,7 @@ public class Create {
         }
 
         // If not enough arguments
-        if (!(args.length == 2)) {
+        if (args.length != 2 && args.length != 3) {
             PlayerLogger.message(player,
                     language.getMessage("Player.Create.Usage"));
             return;
@@ -127,14 +129,52 @@ public class Create {
             }
         }
 
-        areaProtect.getSelectionManager().addPendingSelection(
-                new CreateSelectionListener(areaProtect, regionName), player);
+        if (args.length == 2) {
+            areaProtect.getSelectionManager().addPendingSelection(
+                    new CreateSelectionListener(areaProtect, regionName),
+                    player);
 
-        PlayerLogger.message(player,
-                language.getMessage("Player.Create.Select"));
-        PlayerLogger.message(player,
-                language.getMessage("Player.Create.Cancel"));
+            PlayerLogger.message(player,
+                    language.getMessage("Player.Create.Select"));
+            PlayerLogger.message(player,
+                    language.getMessage("Player.Create.Cancel"));
 
-        return;
+            return;
+        } else {
+            Group group = areaProtect.getGroupManager().getGroup(player);
+
+            int radius = 0;
+            try {
+                radius = Integer.parseInt(args[2]);
+            } catch (NumberFormatException e) {
+                PlayerLogger.message(player,
+                        language.getMessage("Player.Create.Invalid-Radius"));
+                return;
+            }
+
+            // If radius it too big
+            if (radius > group.getMaximumRadius()
+                    && !player
+                            .hasPermission("areaprotect.ap.group.bypass.area-size")) {
+                PlayerLogger.message(player, language.getMessage(
+                        "Player.Create.Max-Radius", new String[] { "%Max%",
+                                "" + group.getMaximumRadius(), "%Selected%",
+                                "" + radius }));
+                return;
+            }
+
+            Location a = new Location(player.getWorld(), player.getLocation()
+                    .getBlockX() - radius, player.getLocation().getBlockY()
+                    - radius, player.getLocation().getBlockZ() - radius);
+            Location b = new Location(player.getWorld(), player.getLocation()
+                    .getBlockX() + radius, player.getLocation().getBlockY()
+                    + radius, player.getLocation().getBlockZ() + radius);
+
+            Selection selection = new Selection(a, b);
+
+            (new CreateSelectionListener(areaProtect, regionName))
+                    .selectionMade(player, selection, true);
+            return;
+        }
     }
 }

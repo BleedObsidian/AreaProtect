@@ -47,7 +47,8 @@ public class CreateSelectionListener implements SelectionListener {
         this.regionName = regionName;
     }
 
-    public void selectionMade(Player player, Selection selection) {
+    public void selectionMade(Player player, Selection selection,
+            boolean useRadius) {
         LanguageFile language = Language.getLanguageFile();
 
         WorldGuardPlugin worldGuard = this.areaProtect.getWorldGuard()
@@ -88,34 +89,36 @@ public class CreateSelectionListener implements SelectionListener {
         int maxLength = group.getMaximumLength();
         int maxWidth = group.getMaximumWidth();
 
-        // If height is too big
-        if (height > maxHeight
-                && !player
-                        .hasPermission("areaprotect.ap.group.bypass.area-size")) {
-            PlayerLogger.message(player, language.getMessage(
-                    "Player.Create.Max-Height", new String[] { "%Max%",
-                            "" + maxHeight, "%Selected%", "" + height }));
-            return;
-        }
+        if (!useRadius) {
+            // If height is too big
+            if (height > maxHeight
+                    && !player
+                            .hasPermission("areaprotect.ap.group.bypass.area-size")) {
+                PlayerLogger.message(player, language.getMessage(
+                        "Player.Create.Max-Height", new String[] { "%Max%",
+                                "" + maxHeight, "%Selected%", "" + height }));
+                return;
+            }
 
-        // If length is too big
-        if (length > maxLength
-                && !player
-                        .hasPermission("areaprotect.ap.group.bypass.area-size")) {
-            PlayerLogger.message(player, language.getMessage(
-                    "Player.Create.Max-Length", new String[] { "%Max%",
-                            "" + maxLength, "%Selected%", "" + length }));
-            return;
-        }
+            // If length is too big
+            if (length > maxLength
+                    && !player
+                            .hasPermission("areaprotect.ap.group.bypass.area-size")) {
+                PlayerLogger.message(player, language.getMessage(
+                        "Player.Create.Max-Length", new String[] { "%Max%",
+                                "" + maxLength, "%Selected%", "" + length }));
+                return;
+            }
 
-        // If width is too big
-        if (width > maxWidth
-                && !player
-                        .hasPermission("areaprotect.ap.group.bypass.area-size")) {
-            PlayerLogger.message(player, language.getMessage(
-                    "Player.Create.Max-Width", new String[] { "%Max%",
-                            "" + maxWidth, "%Selected%", "" + width }));
-            return;
+            // If width is too big
+            if (width > maxWidth
+                    && !player
+                            .hasPermission("areaprotect.ap.group.bypass.area-size")) {
+                PlayerLogger.message(player, language.getMessage(
+                        "Player.Create.Max-Width", new String[] { "%Max%",
+                                "" + maxWidth, "%Selected%", "" + width }));
+                return;
+            }
         }
 
         // If region overlaps

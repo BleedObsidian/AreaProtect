@@ -22,7 +22,8 @@ import org.bukkit.entity.Player;
 import com.gmail.bleedobsidian.areaprotect.Selection;
 
 public interface SelectionListener {
-    public void selectionMade(Player player, Selection selection);
+    public void selectionMade(Player player, Selection selection,
+            boolean useRadius);
 
     public void selectionCanceled(Player player);
 }

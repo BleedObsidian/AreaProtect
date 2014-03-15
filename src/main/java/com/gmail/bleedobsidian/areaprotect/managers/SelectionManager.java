@@ -61,7 +61,7 @@ public class SelectionManager {
         for (Entry<SelectionListener, Player> entry : this.pendingSelections
                 .entrySet()) {
             if (entry.getValue().equals(player)) {
-                entry.getKey().selectionMade(player, selection);
+                entry.getKey().selectionMade(player, selection, false);
                 this.pendingSelections.remove(entry.getKey());
             }
         }

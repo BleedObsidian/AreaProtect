@@ -24,19 +24,21 @@ public class Group {
     private final int MAXIMUM_HEIGHT;
     private final int MAXIMUM_LENGTH;
     private final int MAXIMUM_WIDTH;
+    private final int MAXIMUM_RADIUS;
     private final boolean PAY_PER_BLOCK;
     private final double PRICE;
 
     private FlagSet defaultFlags;
 
     public Group(String name, int maximumAreas, int maximumHeight,
-            int maximumLength, int maximumWidth, boolean payPerBlock,
-            double price, FlagSet defaultFlags) {
+            int maximumLength, int maximumWidth, int maximumRadius,
+            boolean payPerBlock, double price, FlagSet defaultFlags) {
         this.name = name;
         this.MAXIMUM_AREAS = maximumAreas;
         this.MAXIMUM_HEIGHT = maximumHeight;
         this.MAXIMUM_LENGTH = maximumLength;
         this.MAXIMUM_WIDTH = maximumWidth;
+        this.MAXIMUM_RADIUS = maximumRadius;
         this.PAY_PER_BLOCK = payPerBlock;
         this.PRICE = price;
 
@@ -61,6 +63,10 @@ public class Group {
 
     public int getMaximumWidth() {
         return this.MAXIMUM_WIDTH;
+    }
+
+    public int getMaximumRadius() {
+        return this.MAXIMUM_RADIUS;
     }
 
     public boolean isPayPerBlock() {

@@ -20,12 +20,13 @@ Console:
         Disabled: Plugin Metrics Disabled!
 Player:
     Create:
-        Usage: "(RED)Usage: (GOLD)/ap create [name]"
+        Usage: "(RED)Usage: (GOLD)/ap create [name] (RED)or (GOLD)/ap create [name] [radius]"
         Select: "(GREEN)Select two points for your area."
         Select-1: "(GREEN)Point 1 selected."
         Select-2: "(GREEN)Point 2 selected."
         Selecting: "(RED) You are already creating an area."
         Invalid-Name: "(RED)Area names can't contain '(GOLD)/(RED)'."
+        Invalid-Radius: "(RED)Given radius is not valid."
         Name-Used: "(RED) You already have an area called (GOLD)%Area_Name%(RED) in this world."
         Overlaps: "(RED)This selection overlaps with another area you don't own."
         Cancel: "(GREEN)Use: (GOLD)/ap cancel (GREEN) to cancel."
@@ -34,6 +35,7 @@ Player:
         Max-Height: "(RED)Selection height is too big, (GOLD)%Selected%/%Max%(RED) blocks."
         Max-Length: "(RED)Selection length is too big, (GOLD)%Selected%/%Max%(RED) blocks."
         Max-Width: "(RED)Selection width is too big, (GOLD)%Selected%/%Max%(RED) blocks."
+        Max-Radius: "(RED)Given radius is too big, (GOLD)%Selected%/%Max%(RED) blocks."
         Not-Enough: "(RED)You need (GOLD)%Price%(RED) %Currency_Name% to create an area."
         Not-Enough-Per-Block: "(RED)You need (GOLD)%Price%(RED) %Currency_Name% to create this area."
         Took-Money: "(GREEN)Removed (GOLD)%Amount% (GREEN)%Currency_Name% from your account."
@@ -123,6 +125,7 @@ Player:
         Message1: "(GREEN)------------ Help ------------"
         Message2: "(GOLD)[](GREEN) = Required  (GOLD)() (GREEN)= Optional"
         Message3: "(GOLD)/ap create [name] (GREEN)- Create an area."
+        Message15: "(GOLD)/ap create [name] [radius] (GREEN)- Create an area with given radius."
         Message4: "(GOLD)/ap cancel (GREEN)- Cancel the creation of an area."
         Message5: "(GOLD)/ap destroy (name) (GREEN)- Destroy an area."
         Message6: "(GOLD)/ap flag [flag] [value] (GREEN)- Set a flag of an area."

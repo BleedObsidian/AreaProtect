@@ -18,6 +18,8 @@ Groups:
         Maximum-Length: 35
         # Maximum width of area.
         Maximum-Width: 35
+        # Maximum radius of area. (Should be less than or equal to the lowest height, length or width)
+        Maximum-Radius: 35
         # If a player in this group should pay per block.
         Pay-Per-Block: false
         # Price to create an area or price per block (If true) in this group.
