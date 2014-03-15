@@ -222,7 +222,7 @@ public class Info {
             OfflinePlayer playerTo = areaProtect.getServer().getOfflinePlayer(
                     args[2]);
 
-            if (!playerTo.hasPlayedBefore()) {
+            if (playerTo.getPlayer() == null) {
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Info.No-Player", new String[] { "%player%",
                                 args[2] }));
