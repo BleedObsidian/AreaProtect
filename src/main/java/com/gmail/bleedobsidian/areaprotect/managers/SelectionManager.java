@@ -26,18 +26,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.bleedobsidian.areaprotect.Selection;
 import com.gmail.bleedobsidian.areaprotect.listeners.BlockListener;
+import com.gmail.bleedobsidian.areaprotect.listeners.PlayerListener;
 import com.gmail.bleedobsidian.areaprotect.managers.interfaces.SelectionListener;
 
 public class SelectionManager {
     private BlockListener blockListener;
+    private PlayerListener playerListener;
 
     private Map<SelectionListener, Player> pendingSelections = new HashMap<SelectionListener, Player>();
 
     public SelectionManager(JavaPlugin plugin) {
         this.blockListener = new BlockListener(this);
+        this.playerListener = new PlayerListener(this);
 
         plugin.getServer().getPluginManager()
                 .registerEvents(blockListener, plugin);
+        plugin.getServer().getPluginManager()
+                .registerEvents(playerListener, plugin);
     }
 
     public void addPendingSelection(SelectionListener listener, Player player) {
@@ -51,6 +56,7 @@ public class SelectionManager {
                 if (entry.getValue().equals(player)) {
                     entry.getKey().selectionCanceled(player);
                     this.blockListener.removeSelections(player);
+                    this.playerListener.removeSelections(player);
                     this.pendingSelections.remove(entry.getKey());
                 }
             }
