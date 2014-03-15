@@ -61,9 +61,19 @@ public class Destroy {
                         regionManager.removeRegion(region.getId());
 
                         String areaName = region.getId().split("/")[2];
-                        PlayerLogger.message(player, language.getMessage(
-                                "Player.Destroy.Successful", new String[] {
-                                        "%Area_Name%", areaName }));
+
+                        try {
+                            regionManager.save();
+                            PlayerLogger.message(player, language.getMessage(
+                                    "Player.Destroy.Successful", new String[] {
+                                            "%Area_Name%", areaName }));
+                            return;
+                        } catch (ProtectionDatabaseException e) {
+                            PlayerLogger
+                                    .message(player, language
+                                            .getMessage("Player.Destory.Error"));
+                            return;
+                        }
                     } else if (!region.getId().contains("areaprotect")) {
                         PlayerLogger.message(player, language
                                 .getMessage("Player.Destroy.Not-Areaprotect"));
@@ -87,9 +97,17 @@ public class Destroy {
             if (regionManager.hasRegion(regionName)) {
                 regionManager.removeRegion(regionName);
 
-                PlayerLogger.message(player, language.getMessage(
-                        "Player.Destroy.Successful", new String[] {
-                                "%Area_Name%", args[1] }));
+                try {
+                    regionManager.save();
+                    PlayerLogger.message(player, language.getMessage(
+                            "Player.Destroy.Successful", new String[] {
+                                    "%Area_Name%", args[1] }));
+                    return;
+                } catch (ProtectionDatabaseException e) {
+                    PlayerLogger.message(player,
+                            language.getMessage("Player.Destory.Error"));
+                    return;
+                }
             } else {
                 PlayerLogger.message(player, language.getMessage(
                         "Player.Destroy.Invalid-Name", new String[] {
@@ -99,15 +117,6 @@ public class Destroy {
         } else {
             PlayerLogger.message(player,
                     language.getMessage("Player.Destroy.Usage"));
-            return;
-        }
-
-        try {
-            regionManager.save();
-            return;
-        } catch (ProtectionDatabaseException e) {
-            PlayerLogger.message(player,
-                    language.getMessage("Player.Destory.Error"));
             return;
         }
     }
