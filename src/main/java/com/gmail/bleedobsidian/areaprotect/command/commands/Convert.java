@@ -30,8 +30,8 @@ import com.gmail.bleedobsidian.areaprotect.Language;
 import com.gmail.bleedobsidian.areaprotect.configurations.LanguageFile;
 import com.gmail.bleedobsidian.areaprotect.loggers.PluginLogger;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
@@ -93,7 +93,7 @@ public class Convert {
 
                 try {
                     regionManager.save();
-                } catch (ProtectionDatabaseException e) {
+                } catch (StorageException e) {
                     PluginLogger.warning(language
                             .getMessage("Player.Convert.Error"));
                     return;

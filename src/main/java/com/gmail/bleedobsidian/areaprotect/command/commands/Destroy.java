@@ -26,8 +26,8 @@ import com.gmail.bleedobsidian.areaprotect.loggers.PlayerLogger;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class Destroy {
@@ -68,7 +68,7 @@ public class Destroy {
                                     "Player.Destroy.Successful", new String[] {
                                             "%Area_Name%", areaName }));
                             return;
-                        } catch (ProtectionDatabaseException e) {
+                        } catch (StorageException e) {
                             PlayerLogger
                                     .message(player, language
                                             .getMessage("Player.Destory.Error"));
@@ -103,7 +103,7 @@ public class Destroy {
                             "Player.Destroy.Successful", new String[] {
                                     "%Area_Name%", args[1] }));
                     return;
-                } catch (ProtectionDatabaseException e) {
+                } catch (StorageException e) {
                     PlayerLogger.message(player,
                             language.getMessage("Player.Destory.Error"));
                     return;

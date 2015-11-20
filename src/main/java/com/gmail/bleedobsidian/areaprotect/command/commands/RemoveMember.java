@@ -27,8 +27,8 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class RemoveMember {
@@ -144,7 +144,7 @@ public class RemoveMember {
                     "Player.RemoveMember.Successful", new String[] {
                             "%player%", memberName }));
             return;
-        } catch (ProtectionDatabaseException e) {
+        } catch (StorageException e) {
             PlayerLogger.message(player,
                     language.getMessage("Player.RemoveMember.Error"));
             return;
