@@ -3,7 +3,7 @@
   
     <groupId>com.gmail.bleedobsidian.areaprotect</groupId>
     <artifactId>AreaProtect</artifactId>
-    <version>4.1.0</version>
+    <version>4.2.0</version>
     <name>AreaProtect</name>
     <description>AreaProtect is a bukkit plugin that allows users to create their own protections easily.</description>
   
