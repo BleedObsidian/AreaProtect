@@ -34,8 +34,8 @@ import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.domains.DefaultDomain;
-import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 
 public class CreateSelectionListener implements SelectionListener {
@@ -234,7 +234,7 @@ public class CreateSelectionListener implements SelectionListener {
 
         try {
             regionManager.save();
-        } catch (ProtectionDatabaseException e) {
+        } catch (StorageException e) {
             PlayerLogger.message(player,
                     language.getMessage("Player.Create.Error"));
             return;
